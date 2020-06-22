@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SmartRdo.Business.Models;
 
 namespace SmartRdo.Data.Context
 {
@@ -8,5 +9,7 @@ namespace SmartRdo.Data.Context
             : base(options)
         {
         }
+
+        DbSet<Atividade> Atividades { get; set; }
     }
 }
