@@ -25,8 +25,8 @@ namespace SmartRdo.MVC
         {
             //contexto do identity
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                options.UseNpgsql(
+                    Configuration.GetConnectionString("MyWebMvcConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
