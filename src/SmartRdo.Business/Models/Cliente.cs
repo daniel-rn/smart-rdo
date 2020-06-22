@@ -7,7 +7,7 @@ namespace SmartRdo.Business.Models
         public string Nome { get; set; }
 
         /* EF Relations */
-        public IEnumerable<Atividade> Atividade { get; set; }
+        public IEnumerable<Atividade> Atividades { get; set; }
 
     }
 }

@@ -7,6 +7,8 @@ namespace SmartRdo.Business.Models
     {
         public string Codigo { get; set; }
 
+        public string Descricao { get; set; }
+
         public DateTime Inicio { get; set; }
 
         public DateTime Fim { get; set; }
@@ -15,12 +17,14 @@ namespace SmartRdo.Business.Models
 
         public string LocalDescarte { get; set; }
 
-        public Cliente Cliente { get; set; }
+        public Guid ClienteId { get; set; }
 
-        public IEnumerable<Operador> Operador { get; set; }
-        
-        public IEnumerable<Recursos> Recursos { get; set; }
+        public ICollection<AtividadeOperador> AtividadeOperador { get; set; }
+        public ICollection<AtividadeRecurso> AtividadeRecurso { get; set; }
 
         public IEnumerable<AtividadeFotos> AtividadeFotos { get; set; }
+
+        /* EF */
+        public Cliente Cliente { get; set; }
     }
 }
