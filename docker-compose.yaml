@@ -10,5 +10,9 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=docker
-      - POSTGRES_DB=SmartRDO   
+      - POSTGRES_DB=SmartRDO
+    volumes:
+      - .docker/pgdata:/var/lib/postgresql/data
+
+      
     
