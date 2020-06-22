@@ -3,9 +3,9 @@ using SmartRdo.Business.Models;
 
 namespace SmartRdo.Data.Context
 {
-    public class AplicationContext : DbContext
+    public class MyAplicationDbContext : DbContext
     {
-        protected AplicationContext(DbContextOptions<AplicationContext> options) 
+        protected MyAplicationDbContext(DbContextOptions<MyAplicationDbContext> options) 
             : base(options)
         {
         }
