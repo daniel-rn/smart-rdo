@@ -10,8 +10,5 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=docker
-      - POSTGRES_DB=SmartRDO
-    volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-      
+      - POSTGRES_DB=SmartRDO   
     
