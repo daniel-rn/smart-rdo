@@ -1,45 +1,17 @@
 version: '3'
-
-networks: 
-  dockersql-network:
-    driver: bridge
     
 services:
-  webApp.MVC:
-    container_name: SmartRdo.MVC
-    image: smart-rdo-api
-    build:
-      context: .
-      dockerfile: src/SmartRdo.MVC/Dockerfile
-    environment:
-      - ASPNETCORE_URLS=http://+:80
-    ports:
-      - "5055:80"
-    networks:
-      - dockersql-network
-    depends_on:
-      - db.database
-  webApp.API:
-    container_name: SmartRdo.API
-    image: smart-rdo-api
-    build:
-      context: .
-      dockerfile: src/SmartRdo.API/Dockerfile
-    environment:
-      - ASPNETCORE_URLS=http://+:5000
-    ports:
-      - "5000:5000"
-    networks:
-      - dockersql-network
-    depends_on:
-      - db.database
   db.database:
-    container_name: postgres
     image: postgres
+    container_name: postgres_smart_rdo
     restart: always
     ports:
       - "5432:5432"
     environment:
+      - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=SmartRDO
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
       
     
