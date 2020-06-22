@@ -1,5 +1,3 @@
-using System;
-
 namespace SmartRdo.MVC.Models
 {
     public class ErrorViewModel

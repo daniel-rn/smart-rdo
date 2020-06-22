@@ -1,7 +1,5 @@
 ﻿using SmartRdo.Business.Notificacoes;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SmartRdo.Business.Interfaces
 {

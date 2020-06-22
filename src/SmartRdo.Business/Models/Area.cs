@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SmartRdo.Business.Models
+﻿namespace SmartRdo.Business.Models
 {
-    //Localização do cliente ?
-    public class Area
+    public class Area : Entity
     {
+        public string Nome { get; set; }
     }
 }
