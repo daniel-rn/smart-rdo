@@ -7,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SmartRdo.Data.Context;
+using SmartRdo.Business.Interfaces;
+using SmartRdo.Business.Notificacoes;
 
 namespace SmartRdo.MVC
 {
@@ -33,6 +35,10 @@ namespace SmartRdo.MVC
             {
                 options.UseNpgsql(Configuration.GetConnectionString("MyWebMvcConnection"));
             });
+
+            //adicaoDeDependencias 
+
+            services.AddScoped<INotificador, Notificador>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();

@@ -5,7 +5,7 @@ namespace SmartRdo.Data.Context
 {
     public class MyAplicationDbContext : DbContext
     {
-        protected MyAplicationDbContext(DbContextOptions<MyAplicationDbContext> options) 
+        public MyAplicationDbContext(DbContextOptions<MyAplicationDbContext> options) 
             : base(options)
         {
         }
