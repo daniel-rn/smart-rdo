@@ -1,11 +1,13 @@
-﻿namespace SmartRdo.Business.Models
+﻿using System.Collections.Generic;
+
+namespace SmartRdo.Business.Models
 {
     public class Cliente : Entity   
     {
         public string Nome { get; set; }
 
         /* EF Relations */
-        public Atividade Atividade { get; set; }
+        public IEnumerable<Atividade> Atividade { get; set; }
 
     }
 }

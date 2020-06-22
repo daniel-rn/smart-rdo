@@ -1,6 +1,6 @@
 ﻿namespace SmartRdo.Business.Models
 {
-    public class AtividadeFotos 
+    public class AtividadeFotos : Entity
     {
 
         /* EF Relations */
