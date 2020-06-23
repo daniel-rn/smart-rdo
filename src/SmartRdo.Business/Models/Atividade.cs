@@ -20,6 +20,7 @@ namespace SmartRdo.Business.Models
         public Guid ClienteId { get; set; }
 
         public ICollection<AtividadeOperador> AtividadeOperador { get; set; }
+
         public ICollection<AtividadeRecurso> AtividadeRecurso { get; set; }
 
         public IEnumerable<AtividadeFotos> AtividadeFotos { get; set; }
