@@ -3,7 +3,7 @@ using SmartRdo.Business.Models;
 using SmartRdo.Data.Seeder.Seeds;
 using System;
 
-public class OperadoresSeed : ISeed
+public class Seed000Operadores : ISeed
 {
     public void Executar(ModelBuilder modelBuilder)
     {
