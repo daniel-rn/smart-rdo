@@ -23,7 +23,7 @@ namespace SmartRdo.MVC
             services.AddIdentityConfiguration(Configuration);
 
             services.AddDbContext<MyAplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("MyWebMvcConnection")));
+                options.UseNpgsql(Configuration.GetConnectionString("MyWebMvcConnection")));
 
             services.ResolveDependencies();
 
