@@ -9,7 +9,7 @@ namespace SmartRdo.MVC.Configurations
     {
         public static IServiceCollection ResolveDependencies(this IServiceCollection services)
         {
-            services.AddScoped<MyAplicationDbContext>();
+            services.AddScoped<SmartRdoDbContext>();
             services.AddScoped<INotificador, Notificador>();
 
             return services;

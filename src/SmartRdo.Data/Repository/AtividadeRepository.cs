@@ -5,7 +5,7 @@ namespace SmartRdo.Data.Repository
 {
     public class AtividadeRepository : Repository<Atividade>
     {
-        public AtividadeRepository(MyAplicationDbContext db) : base(db)
+        public AtividadeRepository(SmartRdoDbContext db) : base(db)
         {
         }
     }

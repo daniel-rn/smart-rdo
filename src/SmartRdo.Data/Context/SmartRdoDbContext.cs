@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace SmartRdo.Data.Context
 {
-    public class MyAplicationDbContext : DbContext
+    public class SmartRdoDbContext : DbContext
     {
-        public MyAplicationDbContext(DbContextOptions<MyAplicationDbContext> options)
+        public SmartRdoDbContext(DbContextOptions<SmartRdoDbContext> options)
             : base(options)
         {
         }
@@ -25,7 +25,7 @@ namespace SmartRdo.Data.Context
                     .Where(p => p.ClrType == typeof(string))))
                 property.SetColumnType("varchar(100)");
 
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(MyAplicationDbContext).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(SmartRdoDbContext).Assembly);
 
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys())) relationship.DeleteBehavior = DeleteBehavior.ClientSetNull;
 
