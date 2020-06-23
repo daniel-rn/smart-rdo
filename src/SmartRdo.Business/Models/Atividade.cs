@@ -19,6 +19,8 @@ namespace SmartRdo.Business.Models
 
         public Guid ClienteId { get; set; }
 
+        public Guid AreaId { get; set; }
+
         public ICollection<AtividadeOperador> AtividadeOperador { get; set; }
 
         public ICollection<AtividadeRecurso> AtividadeRecurso { get; set; }
@@ -27,5 +29,7 @@ namespace SmartRdo.Business.Models
 
         /* EF */
         public Cliente Cliente { get; set; }
+
+        public Area Area { get; set; }
     }
 }
