@@ -1,14 +1,11 @@
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using SmartRdo.MVC.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SmartRdo.Data.Context;
-using SmartRdo.Business.Interfaces;
-using SmartRdo.Business.Notificacoes;
+using SmartRdo.MVC.Configurations;
 
 namespace SmartRdo.MVC
 {
@@ -23,22 +20,12 @@ namespace SmartRdo.MVC
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //contexto do identity
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseNpgsql(
-                    Configuration.GetConnectionString("MyWebMvcConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentityConfiguration(Configuration);
 
-            //meu contexto com postgress
             services.AddDbContext<MyAplicationDbContext>(options =>
-            {
-                options.UseNpgsql(Configuration.GetConnectionString("MyWebMvcConnection"));
-            });
+                options.UseSqlServer(Configuration.GetConnectionString("MyWebMvcConnection")));
 
-            //adicaoDeDependencias 
-
-            services.AddScoped<INotificador, Notificador>();
+            services.ResolveDependencies();
 
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -56,6 +43,7 @@ namespace SmartRdo.MVC
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
