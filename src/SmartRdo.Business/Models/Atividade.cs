@@ -13,7 +13,9 @@ namespace SmartRdo.Business.Models
 
         public DateTime Fim { get; set; }
 
-        public int Estimativa { get; set; }
+        public DateTime InicioPrevisto { get; set; }
+
+        public DateTime FimPrevisto { get; set; }
 
         public string LocalDescarte { get; set; }
 
