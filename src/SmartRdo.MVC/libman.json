@@ -4,7 +4,27 @@
   "libraries": [
     {
       "library": "twitter-bootstrap@3.3.7",
-      "destination": "wwwroot/twitter-bootstrap/"
+      "destination": "wwwroot/lib/twitter-bootstrap/"
     }
-  ]
+  ,
+{
+  "library": "twitter-bootstrap@4.5.0",
+  "destination": "wwwroot/twitter-bootstrap/"
+}
+,
+{
+  "library": "jquery@3.5.1",
+  "destination": "wwwroot/jquery/"
+}
+,
+{
+  "library": "jquery-validation-unobtrusive@3.2.11",
+  "destination": "wwwroot/jquery-validation-unobtrusive/"
+}
+,
+{
+  "library": "jQuery-Validation-Engine@2.6.4",
+  "destination": "wwwroot/jQuery-Validation-Engine/"
+}
+]
 }
