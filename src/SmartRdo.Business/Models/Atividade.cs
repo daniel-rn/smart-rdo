@@ -23,6 +23,10 @@ namespace SmartRdo.Business.Models
 
         public Guid AreaId { get; set; }
 
+        public Guid ResponsavelAreaId { get; set; }
+
+        public AvaliacaoAtividade AvaliacaoAtividade { get; set; }
+
         public ICollection<AtividadeOperador> AtividadeOperador { get; set; }
 
         public ICollection<AtividadeRecurso> AtividadeRecurso { get; set; }
@@ -33,5 +37,7 @@ namespace SmartRdo.Business.Models
         public Cliente Cliente { get; set; }
 
         public Area Area { get; set; }
+
+        public ResponsavelArea ResponsavelArea { get; set; }
     }
 }

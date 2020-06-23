@@ -11,7 +11,7 @@ namespace SmartRdo.Data.Mappings
             builder.ToTable("AtividadesFotos");
 
             builder.HasKey(f => f.Id);
-
+            
             builder.Property(f => f.Foto)
                 .IsRequired()
                 .HasColumnType("varchar(200)");
