@@ -10,12 +10,12 @@ namespace SmartRdo.Data.Context
         {
         }
 
-        DbSet<Atividade> Atividades { get; set; }
-        DbSet<Cliente> Clientes { get; set; }
-        DbSet<Operador> Operadores { get; set; }
-        DbSet<Recurso> Recursos { get; set; }
-        DbSet<Area> Areas { get; set; }
-        DbSet<AtividadeFotos> AtividadesFotos {get; set;}
+        public DbSet<Atividade> Atividades { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Operador> Operadores { get; set; }
+        public DbSet<Recurso> Recursos { get; set; }
+        public DbSet<Area> Areas { get; set; }
+        public DbSet<AtividadeFotos> AtividadesFotos {get; set;}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
