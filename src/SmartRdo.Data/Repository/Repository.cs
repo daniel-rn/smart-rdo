@@ -13,10 +13,10 @@ namespace SmartRdo.Data.Repository
 {
     public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity, new()
     {
-        protected readonly MyAplicationDbContext Db;
+        protected readonly SmartRdoDbContext Db;
         protected readonly DbSet<TEntity> DbSet;
 
-        protected Repository(MyAplicationDbContext db)
+        protected Repository(SmartRdoDbContext db)
         {
             Db = db;
             DbSet = db.Set<TEntity>();

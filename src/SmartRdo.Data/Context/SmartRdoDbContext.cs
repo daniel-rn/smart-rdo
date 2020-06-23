@@ -3,9 +3,9 @@ using SmartRdo.Business.Models;
 
 namespace SmartRdo.Data.Context
 {
-    public class MyAplicationDbContext : DbContext
+    public class SmartRdoDbContext : DbContext
     {
-        public MyAplicationDbContext(DbContextOptions<MyAplicationDbContext> options)
+        public SmartRdoDbContext(DbContextOptions<SmartRdoDbContext> options)
             : base(options)
         {
         }
@@ -19,7 +19,7 @@ namespace SmartRdo.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(MyAplicationDbContext).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(SmartRdoDbContext).Assembly);
             base.OnModelCreating(modelBuilder);
         }
     }
