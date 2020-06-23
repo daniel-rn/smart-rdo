@@ -26,6 +26,9 @@ namespace SmartRdo.Data.Context
                 property.SetColumnType("varchar(100)");
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(MyAplicationDbContext).Assembly);
+
+            foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys())) relationship.DeleteBehavior = DeleteBehavior.ClientSetNull;
+
             base.OnModelCreating(modelBuilder);
         }
     }
