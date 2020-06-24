@@ -2,7 +2,7 @@
 
 namespace SmartRdo.Business.Models
 {
-    public class ResponsaveisArea
+    public class ResponsaveisArea : Entity
     {
         public Guid AreaId { get; set; }
         public Guid ResponsavelAreaId { get; set; }

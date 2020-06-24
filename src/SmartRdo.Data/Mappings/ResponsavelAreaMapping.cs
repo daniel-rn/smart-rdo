@@ -8,7 +8,7 @@ namespace SmartRdo.Data.Mappings
     {
         public void Configure(EntityTypeBuilder<ResponsavelArea> builder)
         {
-            builder.ToTable("ResponsaveisArea");
+            builder.ToTable("Responsaveis");
 
             builder.HasKey(a => a.Id);
 
