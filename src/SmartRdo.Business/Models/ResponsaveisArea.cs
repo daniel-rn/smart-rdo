@@ -8,7 +8,7 @@ namespace SmartRdo.Business.Models
         public Guid ResponsavelAreaId { get; set; }
 
         /* EF */
-        public Area Atividade { get; set; }
-        public ResponsavelArea Recurso { get; set; }
+        public Area Area { get; set; }
+        public ResponsavelArea Responsavel { get; set; }
     } 
 }
