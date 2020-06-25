@@ -14,6 +14,8 @@ namespace SmartRdo.API.Controllers
     {
         private readonly IAtividadeRepository _atividadeRepository;
         private readonly IMapper _mapper;
+        private readonly INotificador _notificador;
+        private readonly IUser _user;
 
         public AtividadesController(IAtividadeRepository atividadeRepository,
                                     IMapper mapper,
@@ -22,6 +24,8 @@ namespace SmartRdo.API.Controllers
         {
             _atividadeRepository = atividadeRepository;
             _mapper = mapper;
+            _user = user;
+            _notificador = notificador;
         }
     }
 }
