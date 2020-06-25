@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SmartRdo.API.Configurations;
 
 namespace SmartRdo.API
 {
@@ -17,6 +18,8 @@ namespace SmartRdo.API
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddIdentityConfiguration(Configuration);
+
             services.AddControllers();
         }
 
@@ -31,6 +34,7 @@ namespace SmartRdo.API
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
