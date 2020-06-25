@@ -8,10 +8,11 @@ namespace SmartRdo.Business.Models
 
         public string CodigoArea { get; set; }
 
+        public IEnumerable<ResponsaveisArea> ResponsaveisDaArea { get; set; }
+
         #region * EF Relations *
-
+        
         public IEnumerable<Atividade> Atividades { get; set; }
-
         #endregion
     }
 }
