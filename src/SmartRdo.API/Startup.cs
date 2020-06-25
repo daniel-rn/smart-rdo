@@ -21,6 +21,8 @@ namespace SmartRdo.API
             services.AddIdentityConfiguration(Configuration);
 
             services.AddControllers();
+
+            services.AddCors();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -36,6 +38,10 @@ namespace SmartRdo.API
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseCors(option => option.AllowAnyHeader()
+                .AllowAnyOrigin()
+                .AllowAnyOrigin());
 
             app.UseEndpoints(endpoints =>
             {

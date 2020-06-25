@@ -15,12 +15,14 @@ using System.Threading.Tasks;
 
 namespace SmartRdo.API.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class AuthController : MainController
     {
-        private SignInManager<IdentityUser> _signInManager;
-        private UserManager<IdentityUser> _userManager;
-        private ILogger<AuthController> _logger;
-        private AppSettings _appSettings;
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly ILogger<AuthController> _logger;
+        private readonly AppSettings _appSettings;
 
         public AuthController(INotificador notificador,
                               SignInManager<IdentityUser> signInManager,
@@ -41,7 +43,7 @@ namespace SmartRdo.API.Controllers
 
             if (!ModelState.IsValid) return CustomResponse(ModelState);
 
-            var user = new IdentityUser()
+            var user = new IdentityUser
             {
                 UserName = viewModel.Email,
                 Email = viewModel.Email,
