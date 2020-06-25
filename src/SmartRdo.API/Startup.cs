@@ -23,6 +23,8 @@ namespace SmartRdo.API
             services.AddControllers();
 
             services.AddCors();
+
+            services.ResolveDependencies();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

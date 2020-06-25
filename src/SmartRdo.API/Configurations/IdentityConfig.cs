@@ -14,8 +14,16 @@ namespace SmartRdo.API.Configurations
             services.AddDbContext<ApiDbContext>(options =>
                 options.UseNpgsql(configuration.GetConnectionString("MyWebMvcConnection")));
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApiDbContext>();
+            services.AddDefaultIdentity<IdentityUser>()
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<ApiDbContext>()
+                .AddDefaultTokenProviders();
+
+            //services.AddDefaultIdentity<IdentityUser>()
+            //    .AddRoles<IdentityRole>()
+            //    .AddEntityFrameworkStores<ApiDbContext>()
+            //    //.AddErrorDescriber<IdentityMensagensPortugues>()
+            //    .AddDefaultTokenProviders();
 
             return services;
         }
