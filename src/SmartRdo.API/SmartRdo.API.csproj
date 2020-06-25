@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SmartRdo.Business\SmartRdo.Business.csproj" />
+    <ProjectReference Include="..\SmartRdo.Data\SmartRdo.Data.csproj" />
   </ItemGroup>
 
 

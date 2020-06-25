@@ -2,7 +2,7 @@
 
 namespace SmartRdo.Business.Interfaces
 {
-    interface IAtividadeRepository : IRepository<Atividade>
+    public interface IAtividadeRepository : IRepository<Atividade>
     {
     }
 }
