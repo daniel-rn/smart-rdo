@@ -27,7 +27,7 @@ namespace SmartRdo.API.Controllers
                               UserManager<IdentityUser> userManager,
                               IOptions<AppSettings> appSettings,
                               IUser user,
-                              ILogger<AuthController> logger) //: base(notificador, user)
+                              ILogger<AuthController> logger) : base(notificador, user)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -39,7 +39,7 @@ namespace SmartRdo.API.Controllers
         public async Task<ActionResult> Registrar(RegisterUserViewModel viewModel)
         {
 
-            if (!ModelState.IsValid) return null; // return CustomResponse(ModelState) da MainController
+            if (!ModelState.IsValid) return CustomResponse(ModelState);
 
             var user = new IdentityUser()
             {
@@ -53,37 +53,37 @@ namespace SmartRdo.API.Controllers
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, false);
-                return null; // return CustomResponse(await GerarJwt(user.Email)) da MainController
+                return CustomResponse(await GerarJwt(user.Email));
             }
 
             foreach (var error in result.Errors)
             {
-                //NotificarErro(error.Description) da MainController
+                NotificarErro(error.Description);
             }
 
-            return null; //return CustomResponse(ModelState)
+            return CustomResponse(ModelState); 
         }
 
         [HttpPost("entrar")]
         public async Task<ActionResult> Login(LoginUserViewModel model)
         {
-            if (!ModelState.IsValid) return null; // return CustomResponse(ModelState) da MainController
+            if (!ModelState.IsValid) return CustomResponse(ModelState);
 
             var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, true);
             if (result.Succeeded)
             {
                 _logger.LogInformation($"Usuário {model.Email} logado com sucesso");
-                return null;// return CustomResponse(await GerarJwt(user.Email)) da MainController
+                return CustomResponse(await GerarJwt(model.Email));
             }
 
             if (result.IsLockedOut)
             {
-                //NotificarErro("Usuário temporariamente bloqueado por tentativas inválidas"); da MainController
-                return null; // return CustomResponse(model) da MainController
+                NotificarErro("Usuário temporariamente bloqueado por tentativas inválidas");
+                return CustomResponse(model);
             }
 
-            //NotificarErro("Usuário ou Senha incorretos"); da MainController
-            return null; //return CustomResponse(model)
+            NotificarErro("Usuário ou Senha incorretos");
+            return CustomResponse(model);
         }
 
         private async Task<LoginResponseViewModel> GerarJwt(string email)
