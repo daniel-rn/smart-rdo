@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using SmartRdo.API.Data;
+using SmartRdo.API.Extensions;
 using SmartRdo.Business.Interfaces;
 using SmartRdo.Business.Notificacoes;
 
@@ -13,6 +14,7 @@ namespace SmartRdo.API.Configurations
             services.AddScoped<ApiDbContext>();
             services.AddScoped<INotificador, Notificador>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IUser, AspNetUser>();
 
             return services;
         }
