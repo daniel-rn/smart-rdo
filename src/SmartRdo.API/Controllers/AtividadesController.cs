@@ -7,25 +7,37 @@ using SmartRdo.Business.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
+using SmartRdo.API.ViewModels;
 
 namespace SmartRdo.API.Controllers
 {
-    public class AtividadesController : ControllerBase
+    public class AtividadesController : MainController
     {
         private readonly IAtividadeRepository _atividadeRepository;
+        private readonly IAtividadeService _atividadeService;
         private readonly IMapper _mapper;
-        private readonly INotificador _notificador;
-        private readonly IUser _user;
 
-        public AtividadesController(IAtividadeRepository atividadeRepository,
-                                    IMapper mapper,
-                                    INotificador notificador,
-                                    IUser user)
+        public AtividadesController(INotificador notificador,
+                                  IAtividadeRepository atividadeRepository,
+                                  IAtividadeService atividadeService,
+                                  IMapper mapper,
+                                  IUser user) : base(notificador, user)
         {
             _atividadeRepository = atividadeRepository;
+            _atividadeService = atividadeService;
             _mapper = mapper;
-            _user = user;
-            _notificador = notificador;
         }
+
+        //[ClaimsAuthorize("Produto", "Adicionar")]
+        [HttpPost]
+        public async Task<ActionResult<AtividadeViewModel>> Adicione(AtividadeViewModel atividadeViewModel)
+        {
+            if (!ModelState.IsValid) return CustomResponse(ModelState);
+
+            await _atividadeService.Adicione(_mapper.Map<Atividade>(atividadeViewModel));
+
+            return CustomResponse(atividadeViewModel);
+        }
+
     }
 }
