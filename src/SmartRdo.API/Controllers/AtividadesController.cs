@@ -11,6 +11,8 @@ using SmartRdo.API.ViewModels;
 
 namespace SmartRdo.API.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class AtividadesController : MainController
     {
         private readonly IAtividadeRepository _atividadeRepository;
@@ -28,8 +30,7 @@ namespace SmartRdo.API.Controllers
             _mapper = mapper;
         }
 
-        //[ClaimsAuthorize("Produto", "Adicionar")]
-        [HttpPost]
+        [HttpPost("adicionar-atividade")]
         public async Task<ActionResult<AtividadeViewModel>> Adicione(AtividadeViewModel atividadeViewModel)
         {
             if (!ModelState.IsValid) return CustomResponse(ModelState);

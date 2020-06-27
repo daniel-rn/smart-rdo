@@ -10,6 +10,6 @@ namespace SmartRdo.Business.Interfaces
     {
         Task Adicione(Atividade atividade);
         Task Atualize(Atividade atividade);
-        Task Remover(Guid id);
+        Task Remove(Guid id);
     }
 }

@@ -27,7 +27,7 @@ namespace SmartRdo.Business.Services
             throw new NotImplementedException();
         }
 
-        public Task Remover(Guid id)
+        public Task Remove(Guid id)
         {
             throw new NotImplementedException();
         }

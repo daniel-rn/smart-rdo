@@ -1,9 +1,12 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SmartRdo.API.Configurations;
+using SmartRdo.Data.Context;
 
 namespace SmartRdo.API
 {
@@ -31,7 +34,12 @@ namespace SmartRdo.API
         {
             services.AddIdentityConfiguration(Configuration);
 
+            services.AddDbContext<SmartRdoDbContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("MyWebMvcConnection")));
+
             services.AddControllers();
+
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddCors();
 
@@ -58,7 +66,10 @@ namespace SmartRdo.API
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }
