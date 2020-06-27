@@ -22,7 +22,7 @@ namespace SmartRdo.MVC.Controllers
         // GET: Atividades
         public async Task<IActionResult> Index()
         {
-            var smartRdoDbContext = _context.Atividades.Include(a => a.Area).Include(a => a.Cliente);
+            var smartRdoDbContext = _context.Atividades.Include(a => a.Area).Include(a => a.Cliente).Include(a => a.ResponsavelArea);
             return View(await smartRdoDbContext.ToListAsync());
         }
 
@@ -37,6 +37,7 @@ namespace SmartRdo.MVC.Controllers
             var atividade = await _context.Atividades
                 .Include(a => a.Area)
                 .Include(a => a.Cliente)
+                .Include(a => a.ResponsavelArea)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (atividade == null)
             {
@@ -51,6 +52,7 @@ namespace SmartRdo.MVC.Controllers
         {
             ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "CodigoArea");
             ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Nome");
+            ViewData["ResponsavelAreaId"] = new SelectList(_context.Set<ResponsavelArea>(), "Id", "Nome");
             return View();
         }
 
@@ -59,7 +61,7 @@ namespace SmartRdo.MVC.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Codigo,Descricao,Inicio,Fim,InicioPrevisto,FimPrevisto,LocalDescarte,ClienteId,AreaId,Id")] Atividade atividade)
+        public async Task<IActionResult> Create([Bind("Codigo,Descricao,Inicio,Fim,InicioPrevisto,FimPrevisto,LocalDescarte,ClienteId,AreaId,ResponsavelAreaId,Id")] Atividade atividade)
         {
             if (ModelState.IsValid)
             {
@@ -70,6 +72,7 @@ namespace SmartRdo.MVC.Controllers
             }
             ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "CodigoArea", atividade.AreaId);
             ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Nome", atividade.ClienteId);
+            ViewData["ResponsavelAreaId"] = new SelectList(_context.Set<ResponsavelArea>(), "Id", "Nome", atividade.ResponsavelAreaId);
             return View(atividade);
         }
 
@@ -88,6 +91,7 @@ namespace SmartRdo.MVC.Controllers
             }
             ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "CodigoArea", atividade.AreaId);
             ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Nome", atividade.ClienteId);
+            ViewData["ResponsavelAreaId"] = new SelectList(_context.Set<ResponsavelArea>(), "Id", "Nome", atividade.ResponsavelAreaId);
             return View(atividade);
         }
 
@@ -96,7 +100,7 @@ namespace SmartRdo.MVC.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Codigo,Descricao,Inicio,Fim,InicioPrevisto,FimPrevisto,LocalDescarte,ClienteId,AreaId,Id")] Atividade atividade)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Codigo,Descricao,Inicio,Fim,InicioPrevisto,FimPrevisto,LocalDescarte,ClienteId,AreaId,ResponsavelAreaId,Id")] Atividade atividade)
         {
             if (id != atividade.Id)
             {
@@ -125,6 +129,7 @@ namespace SmartRdo.MVC.Controllers
             }
             ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "CodigoArea", atividade.AreaId);
             ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Nome", atividade.ClienteId);
+            ViewData["ResponsavelAreaId"] = new SelectList(_context.Set<ResponsavelArea>(), "Id", "Nome", atividade.ResponsavelAreaId);
             return View(atividade);
         }
 
@@ -139,6 +144,7 @@ namespace SmartRdo.MVC.Controllers
             var atividade = await _context.Atividades
                 .Include(a => a.Area)
                 .Include(a => a.Cliente)
+                .Include(a => a.ResponsavelArea)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (atividade == null)
             {
