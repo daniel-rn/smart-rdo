@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartRdo.Business", "src\Sm
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartRdo.Data", "src\SmartRdo.Data\SmartRdo.Data.csproj", "{436DA5F3-BDCA-4A08-BAAC-B66C670163F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartRdo.MVC", "src\SmartRdo.MVC\SmartRdo.MVC.csproj", "{A2A904AD-E12F-471D-AA87-613079A737DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartRdo.MVC", "src\SmartRdo.MVC\SmartRdo.MVC.csproj", "{A2A904AD-E12F-471D-AA87-613079A737DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
