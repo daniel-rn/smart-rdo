@@ -46,11 +46,14 @@ namespace SmartRdo.MVC
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseCookiePolicy();
 
             app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseGlobalizationConfig();
 
             app.UseEndpoints(endpoints =>
             {
