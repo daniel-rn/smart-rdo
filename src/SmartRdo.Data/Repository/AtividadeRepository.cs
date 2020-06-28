@@ -4,6 +4,7 @@ using SmartRdo.Business.Models;
 using SmartRdo.Data.Context;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SmartRdo.Data.Repository
@@ -12,19 +13,20 @@ namespace SmartRdo.Data.Repository
     {
         public AtividadeRepository(SmartRdoDbContext db) : base(db){ }
 
-        public Task<Atividade> ObtenhaAtivdadeOperador(Guid id)
+        public async Task<Atividade> ObtenhaAtivdadeOperador(Guid id)
         {
-            throw new NotImplementedException();
+            return await Db.Atividades.AsNoTracking().FirstOrDefaultAsync(a => a.Id == id);
         }
 
-        public Task<IEnumerable<Atividade>> ObtenhaAtividadesOperadores()
+        public async Task<IEnumerable<Atividade>> ObtenhaAtividadesOperadores()
         {
-            throw new NotImplementedException();
+            return await Db.Atividades.AsNoTracking().Include(a => a.AtividadeOperador)
+                .OrderBy(a => a.Descricao).ToListAsync();
         }
 
-        public Task<IEnumerable<Atividade>> ObtenhaAtividadesPorOperador(Guid operadorId)
+        public async Task<IEnumerable<Atividade>> ObtenhaAtividadesPorOperador(Guid operadorId)
         {
-            throw new NotImplementedException();
+            return await Buscar(a => a.AtividadeOperador.All(ao => ao.OperadorId == operadorId));
         }
     }
 }

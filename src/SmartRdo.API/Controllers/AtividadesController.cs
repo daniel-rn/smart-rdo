@@ -40,5 +40,25 @@ namespace SmartRdo.API.Controllers
             return CustomResponse(atividadeViewModel);
         }
 
+        [HttpGet]
+        public async Task<IEnumerable<AtividadeViewModel>> ObterTodos()
+        {
+            return _mapper.Map<IEnumerable<AtividadeViewModel>>(await _atividadeRepository.ObtenhaAtividadesOperadores());
+        }
+
+        [HttpGet("{id: guid}")]
+        public async Task<ActionResult<AtividadeViewModel>> ObterAtividadePorOperador(Guid idOperador)
+        {
+            var atividadeViewModel = await ObterAtividade(idOperador);
+
+            if (atividadeViewModel == null) return NotFound();
+
+            return atividadeViewModel;
+        }
+
+        private async Task<AtividadeViewModel> ObterAtividade(Guid idOperador)
+        {
+            return _mapper.Map<AtividadeViewModel>(await _atividadeRepository.ObtenhaAtivdadeOperador(idOperador));
+        }
     }
 }
