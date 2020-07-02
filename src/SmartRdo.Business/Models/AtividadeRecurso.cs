@@ -1,5 +1,4 @@
-﻿using SmartRdo.Business.Models;
-using System;
+﻿using System;
 
 namespace SmartRdo.Business.Models
 {

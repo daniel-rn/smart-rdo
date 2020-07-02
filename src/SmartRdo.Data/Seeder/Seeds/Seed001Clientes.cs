@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartRdo.Business.Models;
 using SmartRdo.Data.Seeder.Seeds;
-using System;
 
 public class Seed001Clientes : ISeed
 {
