@@ -7,7 +7,7 @@ networks:
 services:
   webApp.MVC:
     container_name: SmartRdo.MVC
-    image: smart-rdo-api
+    image: smart-rdo-mvc
     build:
       context: .
       dockerfile: src/SmartRdo.MVC/Dockerfile
