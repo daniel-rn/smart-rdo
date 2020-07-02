@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using SmartRdo.API.Controllers;
 using SmartRdo.Business.Interfaces;
 using SmartRdo.Business.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using SmartRdo.API.ViewModels;
@@ -30,7 +28,7 @@ namespace SmartRdo.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost("adicionar-atividade")]
+        [HttpPost("adicionar")]
         public async Task<ActionResult<AtividadeViewModel>> Adicione(AtividadeViewModel atividadeViewModel)
         {
             if (!ModelState.IsValid) return CustomResponse(ModelState);
@@ -46,7 +44,7 @@ namespace SmartRdo.API.Controllers
             return _mapper.Map<IEnumerable<AtividadeViewModel>>(await _atividadeRepository.ObtenhaAtividadesOperadores());
         }
 
-        [HttpGet("{id: guid}")]
+        [HttpGet("{id:guid}")]
         public async Task<ActionResult<AtividadeViewModel>> ObterAtividadePorOperador(Guid idOperador)
         {
             var atividadeViewModel = await ObterAtividade(idOperador);
