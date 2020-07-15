@@ -10,5 +10,6 @@ namespace SmartRdo.Business.Interfaces
         Task<IEnumerable<Atividade>> ObtenhaAtividadesPorOperador(Guid operadorId);
         Task<IEnumerable<Atividade>> ObtenhaAtividadesOperadores();
         Task<Atividade> ObtenhaAtivdadeOperador(Guid id);
+        Task<Atividade> Consultar(Guid? id);
     }
 }
