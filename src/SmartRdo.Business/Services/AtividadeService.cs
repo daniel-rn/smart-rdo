@@ -32,7 +32,7 @@ namespace SmartRdo.Business.Services
 
         public Task Remove(Guid id)
         {
-            throw new NotImplementedException();
+            return _atividadeRepository.Remover(id);
         }
 
         public async Task<List<Atividade>> ObterTodos()
