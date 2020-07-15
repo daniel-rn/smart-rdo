@@ -39,10 +39,10 @@ namespace SmartRdo.MVC.Models
         public AreaViewModel Area { get; set; }
 
         [Display(Name = "Responsável da área")]
-        public ResponsavelArea ResponsavelArea { get; set; }
+        public ResponsavelAreaViewModel ResponsavelArea { get; set; }
 
-        [Display(Name = "Operador")]
-        public Operador Operador { get; set; }
+        //[Display(Name = "Operador")]
+        //public Operador Operador { get; set; }
 
     }
 }
