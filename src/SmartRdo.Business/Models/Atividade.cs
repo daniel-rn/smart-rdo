@@ -26,6 +26,7 @@ namespace SmartRdo.Business.Models
         public Guid ClienteId { get; set; }
         public Guid AreaId { get; set; }
         public Guid ResponsavelAreaId { get; set; }
+        public Guid OperadorId { get; set; }
         public AvaliacaoAtividade AvaliacaoAtividade { get; set; }
         public ICollection<AtividadeOperador> AtividadeOperador { get; set; }
         public ICollection<AtividadeRecurso> AtividadeRecurso { get; set; }
@@ -38,5 +39,8 @@ namespace SmartRdo.Business.Models
         public Area Area { get; set; }
         [Display(Name = "Responsável da área")]
         public ResponsavelArea ResponsavelArea { get; set; }
+
+        [Display(Name = "Operador")]
+        public Operador Operador { get; set; }
     }
 }

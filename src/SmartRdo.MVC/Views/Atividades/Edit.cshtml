@@ -1,10 +1,10 @@
 ﻿@model SmartRdo.Business.Models.Atividade
 
 @{
-    ViewData["Title"] = "Editar";
+    ViewData["Title"] = "Edit";
 }
 
-<h1>Editar</h1>
+<h1>Edit</h1>
 
 <h4>Atividade</h4>
 <hr />
@@ -62,16 +62,21 @@
                 <select asp-for="ResponsavelAreaId" class="form-control" asp-items="ViewBag.ResponsavelAreaId"></select>
                 <span asp-validation-for="ResponsavelAreaId" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="OperadorId" class="control-label"></label>
+                <select asp-for="OperadorId" class="form-control" asp-items="ViewBag.OperadorId"></select>
+                <span asp-validation-for="OperadorId" class="text-danger"></span>
+            </div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <input type="submit" value="Salvar" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Voltar</a>
+    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

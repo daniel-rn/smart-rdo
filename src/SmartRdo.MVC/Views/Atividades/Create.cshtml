@@ -1,12 +1,12 @@
 ﻿@model SmartRdo.Business.Models.Atividade
 
 @{
-    ViewData["Title"] = "Cadastro de atividades";
+    ViewData["Title"] = "Create";
 }
 
-<h1>Cadastro de atividades</h1>
+<h1>Create</h1>
 
-<h4>/Atividades/Create</h4>
+<h4>Atividade</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -22,7 +22,7 @@
                 <input asp-for="Descricao" class="form-control" />
                 <span asp-validation-for="Descricao" class="text-danger"></span>
             </div>
-            @*<div class="form-group">
+            <div class="form-group">
                 <label asp-for="Inicio" class="control-label"></label>
                 <input asp-for="Inicio" class="form-control" />
                 <span asp-validation-for="Inicio" class="text-danger"></span>
@@ -31,43 +31,47 @@
                 <label asp-for="Fim" class="control-label"></label>
                 <input asp-for="Fim" class="form-control" />
                 <span asp-validation-for="Fim" class="text-danger"></span>
-            </div>*@
+            </div>
             <div class="form-group">
-                <label asp-for="InicioPrevisto" class="control-label">Previsão de início</label>
+                <label asp-for="InicioPrevisto" class="control-label"></label>
                 <input asp-for="InicioPrevisto" class="form-control" />
                 <span asp-validation-for="InicioPrevisto" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FimPrevisto" class="control-label">Previsão de término</label>
+                <label asp-for="FimPrevisto" class="control-label"></label>
                 <input asp-for="FimPrevisto" class="form-control" />
                 <span asp-validation-for="FimPrevisto" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="LocalDescarte" class="control-label">Local de descarte</label>
+                <label asp-for="LocalDescarte" class="control-label"></label>
                 <input asp-for="LocalDescarte" class="form-control" />
                 <span asp-validation-for="LocalDescarte" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ClienteId" class="control-label">Cliente</label>
+                <label asp-for="ClienteId" class="control-label"></label>
                 <select asp-for="ClienteId" class ="form-control" asp-items="ViewBag.ClienteId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="AreaId" class="control-label">Área</label>
+                <label asp-for="AreaId" class="control-label"></label>
                 <select asp-for="AreaId" class ="form-control" asp-items="ViewBag.AreaId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="ResponsavelAreaId" class="control-label">Responsável da área</label>
+                <label asp-for="ResponsavelAreaId" class="control-label"></label>
                 <select asp-for="ResponsavelAreaId" class ="form-control" asp-items="ViewBag.ResponsavelAreaId"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Confirmar" class="btn btn-primary" />
+                <label asp-for="OperadorId" class="control-label"></label>
+                <select asp-for="OperadorId" class ="form-control" asp-items="ViewBag.OperadorId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Voltar</a>
+    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
