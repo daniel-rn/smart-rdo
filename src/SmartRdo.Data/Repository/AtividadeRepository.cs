@@ -28,5 +28,25 @@ namespace SmartRdo.Data.Repository
         {
             return await Buscar(a => a.AtividadeOperador.All(ao => ao.OperadorId == operadorId));
         }
+
+        public override async Task<List<Atividade>> ObterTodos()
+        {
+            return await Db.Atividades
+                .Include(a => a.Area)
+                .Include(a => a.Cliente)
+                .Include(a => a.Operador)
+                .Include(a => a.ResponsavelArea)
+                .ToListAsync();
+        }
+
+        public async Task<Atividade> Consultar(Guid? id)
+        {
+            return await Db.Atividades
+                .Include(a => a.Area)
+                .Include(a => a.Cliente)
+                .Include(a => a.Operador)
+                .Include(a => a.ResponsavelArea)
+                .FirstOrDefaultAsync(c => c.Id == id);
+        }
     }
 }

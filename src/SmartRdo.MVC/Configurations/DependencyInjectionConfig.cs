@@ -1,7 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SmartRdo.Business.Interfaces;
 using SmartRdo.Business.Notificacoes;
+using SmartRdo.Business.Services;
 using SmartRdo.Data.Context;
+using SmartRdo.Data.Repository;
 
 namespace SmartRdo.MVC.Configurations
 {
@@ -11,6 +13,9 @@ namespace SmartRdo.MVC.Configurations
         {
             services.AddScoped<SmartRdoDbContext>();
             services.AddScoped<INotificador, Notificador>();
+
+            services.AddScoped<IAtividadeService, AtividadeService>();
+            services.AddScoped<IAtividadeRepository, AtividadeRepository>();
 
             return services;
         }

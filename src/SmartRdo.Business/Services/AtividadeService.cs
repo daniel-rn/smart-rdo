@@ -2,6 +2,8 @@
 using SmartRdo.Business.Models;
 using SmartRdo.Business.Models.Validacoes;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SmartRdo.Business.Services
@@ -9,6 +11,7 @@ namespace SmartRdo.Business.Services
     public class AtividadeService : BaseService, IAtividadeService
     {
         private readonly IAtividadeRepository _atividadeRepository;
+        
         public AtividadeService(INotificador notificador, IAtividadeRepository atividadeRepository) 
             : base(notificador)
         {
@@ -32,6 +35,15 @@ namespace SmartRdo.Business.Services
             throw new NotImplementedException();
         }
 
+        public async Task<List<Atividade>> ObterTodos()
+        {
+            return await _atividadeRepository.ObterTodos();
+        }
+
+        public async Task<Atividade> Consultar(Guid? id)
+        {
+            return await _atividadeRepository.Consultar(id);
+        }
 
         public void Dispose()
         {

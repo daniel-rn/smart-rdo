@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using SmartRdo.Business.Interfaces;
 using SmartRdo.Business.Models;
+using SmartRdo.Business.Services;
 using SmartRdo.Data.Context;
 
 namespace SmartRdo.MVC.Controllers
@@ -13,23 +15,18 @@ namespace SmartRdo.MVC.Controllers
     public class AtividadesController : Controller
     {
         private readonly SmartRdoDbContext _context;
+        private readonly IAtividadeService _atividadeService;
 
-        public AtividadesController(SmartRdoDbContext context)
+        public AtividadesController(SmartRdoDbContext context, IAtividadeService atividadeService)
         {
             _context = context;
+            _atividadeService = atividadeService;
         }
 
         // GET: Atividades
         public async Task<IActionResult> Index()
         {
-            var smartRdoDbContext = _context
-                .Atividades
-                .Include(a => a.Area)
-                .Include(a => a.Cliente)
-                .Include(a => a.Operador)
-                .Include(a => a.ResponsavelArea);
-
-            return View(await smartRdoDbContext.ToListAsync());
+            return View(await _atividadeService.ObterTodos());
         }
 
         // GET: Atividades/Details/5
@@ -40,12 +37,8 @@ namespace SmartRdo.MVC.Controllers
                 return NotFound();
             }
 
-            var atividade = await _context.Atividades
-                .Include(a => a.Area)
-                .Include(a => a.Cliente)
-                .Include(a => a.Operador)
-                .Include(a => a.ResponsavelArea)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var atividade = await _atividadeService.Consultar(id);
+
             if (atividade == null)
             {
                 return NotFound();
