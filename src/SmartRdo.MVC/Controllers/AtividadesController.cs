@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -106,8 +105,7 @@ namespace SmartRdo.MVC.Controllers
             {
                 try
                 {
-                    _context.Update(atividade);
-                    await _context.SaveChangesAsync();
+                    await _atividadeService.Atualize(atividade);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -157,7 +155,7 @@ namespace SmartRdo.MVC.Controllers
 
         private bool AtividadeExists(Guid id)
         {
-            return _context.Atividades.Any(e => e.Id == id);
+            return _atividadeService.Consultar(id) != null;
         }
     }
 }
