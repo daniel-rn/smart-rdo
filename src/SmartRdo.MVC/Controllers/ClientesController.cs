@@ -1,25 +1,24 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SmartRdo.Business.Interfaces.services;
 using SmartRdo.Business.Models;
-using SmartRdo.Data.Context;
 
 namespace SmartRdo.MVC.Controllers
 {
     public class ClientesController : Controller
     {
-        private readonly SmartRdoDbContext _context;
+        private readonly IClienteService _clienteService;
 
-        public ClientesController(SmartRdoDbContext context)
+        public ClientesController(IClienteService clienteService)
         {
-            _context = context;
+            _clienteService = clienteService;
         }
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Clientes.ToListAsync());
+            return View(await _clienteService.ObterTodos());
         }
 
         public async Task<IActionResult> Details(Guid? id)
@@ -29,8 +28,8 @@ namespace SmartRdo.MVC.Controllers
                 return NotFound();
             }
 
-            var cliente = await _context.Clientes
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var cliente = await _clienteService.Consultar(id);
+
             if (cliente == null)
             {
                 return NotFound();
@@ -46,15 +45,16 @@ namespace SmartRdo.MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Nome,Id")] Cliente cliente)
+        public async Task<IActionResult> Create(Cliente cliente)
         {
             if (ModelState.IsValid)
             {
                 cliente.Id = Guid.NewGuid();
-                _context.Add(cliente);
-                await _context.SaveChangesAsync();
+                
+                await _clienteService.Adicione(cliente);
                 return RedirectToAction(nameof(Index));
             }
+
             return View(cliente);
         }
 
@@ -65,11 +65,13 @@ namespace SmartRdo.MVC.Controllers
                 return NotFound();
             }
 
-            var cliente = await _context.Clientes.FindAsync(id);
+            var cliente = await _clienteService.Consultar(id);
+            
             if (cliente == null)
             {
                 return NotFound();
             }
+
             return View(cliente);
         }
 
@@ -86,8 +88,7 @@ namespace SmartRdo.MVC.Controllers
             {
                 try
                 {
-                    _context.Update(cliente);
-                    await _context.SaveChangesAsync();
+                    await _clienteService.Atualize(cliente);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -110,8 +111,8 @@ namespace SmartRdo.MVC.Controllers
                 return NotFound();
             }
 
-            var cliente = await _context.Clientes
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var cliente = await _clienteService.Consultar(id);
+
             if (cliente == null)
             {
                 return NotFound();
@@ -124,15 +125,13 @@ namespace SmartRdo.MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var cliente = await _context.Clientes.FindAsync(id);
-            _context.Clientes.Remove(cliente);
-            await _context.SaveChangesAsync();
+            await _clienteService.Remove(id);
             return RedirectToAction(nameof(Index));
         }
 
         private bool ClienteExists(Guid id)
         {
-            return _context.Clientes.Any(e => e.Id == id);
+            return _clienteService.Consultar(id) != null;
         }
     }
 }
