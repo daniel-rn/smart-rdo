@@ -37,7 +37,9 @@ namespace SmartRdo.API
             services.AddDbContext<SmartRdoDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("MyWebMvcConnection")));
 
-            services.AddControllers().AddNewtonsoftJson();
+            services
+                .AddControllers()
+                .AddNewtonsoftJson();
 
             services.AddAutoMapper(typeof(Startup));
 

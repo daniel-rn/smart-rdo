@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SmartRdo.Business.Interfaces;
 using SmartRdo.Business.Models;
 using SmartRdo.Data.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SmartRdo.Business.Interfaces.repository;
 
 namespace SmartRdo.Data.Repository
 {

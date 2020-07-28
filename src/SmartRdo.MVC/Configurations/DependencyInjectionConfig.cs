@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SmartRdo.Business.Interfaces;
+using SmartRdo.Business.Interfaces.repository;
+using SmartRdo.Business.Interfaces.services;
 using SmartRdo.Business.Notificacoes;
 using SmartRdo.Business.Services;
 using SmartRdo.Data.Context;
@@ -16,6 +18,18 @@ namespace SmartRdo.MVC.Configurations
 
             services.AddScoped<IAtividadeService, AtividadeService>();
             services.AddScoped<IAtividadeRepository, AtividadeRepository>();
+
+            services.AddScoped<IClienteService, ClienteService>();
+            services.AddScoped<IClienteRepository, ClienteRepository>();
+
+            services.AddScoped<IOperadoresService, OperadorService>();
+            services.AddScoped<IOperadorRepository, OperadorRepository>();
+
+            services.AddScoped<IAreasService, AreasService>();
+            services.AddScoped<IAreasRepository, AreaRepository>();
+
+            services.AddScoped<IResponsavelAreasService, ResponsavelAreaService>();
+            services.AddScoped<IResponsavelAreaRepository, ResponsavelAreaRepository>();
 
             return services;
         }

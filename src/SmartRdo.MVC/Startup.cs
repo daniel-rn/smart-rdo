@@ -56,11 +56,11 @@ namespace SmartRdo.MVC
             app.UseCookiePolicy();
 
             app.UseRouting();
+            
+            app.UseGlobalizationConfig();
 
             app.UseAuthentication();
             app.UseAuthorization();
-
-            app.UseGlobalizationConfig();
 
             app.UseEndpoints(endpoints =>
             {

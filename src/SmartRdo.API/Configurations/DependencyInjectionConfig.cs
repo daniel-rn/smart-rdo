@@ -3,6 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 using SmartRdo.API.Data;
 using SmartRdo.API.Extensions;
 using SmartRdo.Business.Interfaces;
+using SmartRdo.Business.Interfaces.repository;
+using SmartRdo.Business.Interfaces.services;
 using SmartRdo.Business.Notificacoes;
 using SmartRdo.Business.Services;
 using SmartRdo.Data.Context;

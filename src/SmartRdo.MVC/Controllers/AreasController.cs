@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmartRdo.Business.Models;
@@ -8,6 +9,7 @@ using SmartRdo.Data.Context;
 
 namespace SmartRdo.MVC.Controllers
 {
+    
     public class AreasController : Controller
     {
         private readonly SmartRdoDbContext _context;

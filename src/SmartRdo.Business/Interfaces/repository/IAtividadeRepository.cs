@@ -1,9 +1,9 @@
-﻿using SmartRdo.Business.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using SmartRdo.Business.Models;
 
-namespace SmartRdo.Business.Interfaces
+namespace SmartRdo.Business.Interfaces.repository
 {
     public interface IAtividadeRepository : IRepository<Atividade>
     {

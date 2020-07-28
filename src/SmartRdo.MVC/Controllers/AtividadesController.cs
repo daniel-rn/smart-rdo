@@ -1,23 +1,37 @@
 ﻿using System;
+using System.Security.AccessControl;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SmartRdo.Business.Interfaces;
+using SmartRdo.Business.Interfaces.services;
 using SmartRdo.Business.Models;
 using SmartRdo.Data.Context;
 
 namespace SmartRdo.MVC.Controllers
 {
+    [Authorize]
     public class AtividadesController : Controller
     {
-        private readonly SmartRdoDbContext _context;
         private readonly IAtividadeService _atividadeService;
+        private readonly IAreasService _areasService;
+        private readonly IClienteService _clienteService;
+        private readonly IOperadoresService _operadoresService;
+        private readonly IResponsavelAreasService _responsavelAreasService;
 
-        public AtividadesController(SmartRdoDbContext context, IAtividadeService atividadeService)
+        public AtividadesController(IAtividadeService atividadeService,
+            IAreasService areasService,
+            IClienteService clienteService,
+            IOperadoresService operadoresService,
+            IResponsavelAreasService responsavelAreasService)
         {
-            _context = context;
             _atividadeService = atividadeService;
+            _areasService = areasService;
+            _clienteService = clienteService;
+            _operadoresService = operadoresService;
+            _responsavelAreasService = responsavelAreasService;
         }
 
         public async Task<IActionResult> Index()
@@ -42,12 +56,12 @@ namespace SmartRdo.MVC.Controllers
             return View(atividade);
         }
 
-        public IActionResult Create()
+        public async Task<ViewResult> Create()
         {
-            ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "CodigoArea");
-            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Nome");
-            ViewData["OperadorId"] = new SelectList(_context.Operadores, "Id", "Nome");
-            ViewData["ResponsavelAreaId"] = new SelectList(_context.ResponsavelAreas, "Id", "Nome");
+            ViewData["AreaId"] = new SelectList(await _areasService.ObterTodos(), "Id", "CodigoArea");
+            ViewData["ClienteId"] = new SelectList(await _clienteService.ObterTodos(), "Id", "Nome");
+            ViewData["OperadorId"] = new SelectList(await _operadoresService.ObterTodos(), "Id", "Nome");
+            ViewData["ResponsavelAreaId"] = new SelectList(await _responsavelAreasService.ObterTodos(), "Id", "Nome");
 
             return View();
         }
@@ -62,11 +76,11 @@ namespace SmartRdo.MVC.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "CodigoArea", atividade.AreaId);
-            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Nome", atividade.ClienteId);
-            ViewData["OperadorId"] = new SelectList(_context.Operadores, "Id", "Nome", atividade.OperadorId);
-            ViewData["ResponsavelAreaId"] = new SelectList(_context.ResponsavelAreas, "Id", "Nome", atividade.ResponsavelAreaId);
-            
+            ViewData["AreaId"] = new SelectList(await _areasService.ObterTodos(), "Id", "CodigoArea", atividade.AreaId);
+            ViewData["ClienteId"] = new SelectList(await _clienteService.ObterTodos(), "Id", "Nome", atividade.ClienteId);
+            ViewData["OperadorId"] = new SelectList(await _operadoresService.ObterTodos(), "Id", "Nome", atividade.OperadorId);
+            ViewData["ResponsavelAreaId"] = new SelectList(await _responsavelAreasService.ObterTodos(), "Id", "Nome", atividade.ResponsavelAreaId);
+
             return View(atividade);
         }
 
@@ -84,10 +98,10 @@ namespace SmartRdo.MVC.Controllers
                 return NotFound();
             }
 
-            ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "CodigoArea", atividade.AreaId);
-            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Nome", atividade.ClienteId);
-            ViewData["OperadorId"] = new SelectList(_context.Operadores, "Id", "Nome", atividade.OperadorId);
-            ViewData["ResponsavelAreaId"] = new SelectList(_context.ResponsavelAreas, "Id", "Nome", atividade.ResponsavelAreaId);
+            ViewData["AreaId"] = new SelectList(await _areasService.ObterTodos(), "Id", "CodigoArea", atividade.AreaId);
+            ViewData["ClienteId"] = new SelectList(await _clienteService.ObterTodos(), "Id", "Nome", atividade.ClienteId);
+            ViewData["OperadorId"] = new SelectList(await _operadoresService.ObterTodos(), "Id", "Nome", atividade.OperadorId);
+            ViewData["ResponsavelAreaId"] = new SelectList(await _responsavelAreasService.ObterTodos(), "Id", "Nome", atividade.ResponsavelAreaId);
 
             return View(atividade);
         }
@@ -120,10 +134,10 @@ namespace SmartRdo.MVC.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "CodigoArea", atividade.AreaId);
-            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Nome", atividade.ClienteId);
-            ViewData["OperadorId"] = new SelectList(_context.Operadores, "Id", "Nome", atividade.OperadorId);
-            ViewData["ResponsavelAreaId"] = new SelectList(_context.ResponsavelAreas, "Id", "Nome", atividade.ResponsavelAreaId);
+            ViewData["AreaId"] = new SelectList(await _areasService.ObterTodos(), "Id", "CodigoArea", atividade.AreaId);
+            ViewData["ClienteId"] = new SelectList(await _clienteService.ObterTodos(), "Id", "Nome", atividade.ClienteId);
+            ViewData["OperadorId"] = new SelectList(await _operadoresService.ObterTodos(), "Id", "Nome", atividade.OperadorId);
+            ViewData["ResponsavelAreaId"] = new SelectList(await _responsavelAreasService.ObterTodos(), "Id", "Nome", atividade.ResponsavelAreaId);
 
             return View(atividade);
         }
@@ -136,7 +150,7 @@ namespace SmartRdo.MVC.Controllers
             }
 
             var atividade = await _atividadeService.Consultar(id);
-            
+
             if (atividade == null)
             {
                 return NotFound();
