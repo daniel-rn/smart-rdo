@@ -41,7 +41,7 @@ namespace SmartRdo.Business.Services
 
         public async Task<Operador> Consultar(Guid? id)
         {
-            await _operadorRepository.ObterPorId(id.Value);
+            return await _operadorRepository.ObterPorId(id.Value);
         }
     }
 }
