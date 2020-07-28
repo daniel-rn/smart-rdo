@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using SmartRdo.Business.Interfaces;
+using SmartRdo.Business.Interfaces.repository;
 using SmartRdo.Business.Interfaces.services;
 using SmartRdo.Business.Models;
 
@@ -10,8 +11,12 @@ namespace SmartRdo.Business.Services
 {
     public class OperadorService : BaseService, IOperadoresService
     {
-        public OperadorService(INotificador notificador) : base(notificador)
+        private readonly IOperadorRepository _operadorRepository;
+
+        public OperadorService(INotificador notificador,  IOperadorRepository operadorRepository) 
+            : base(notificador)
         {
+            _operadorRepository = operadorRepository;
         }
 
 
@@ -32,7 +37,7 @@ namespace SmartRdo.Business.Services
 
         public async Task<List<Operador>> ObterTodos()
         {
-            throw new NotImplementedException();
+            return await _operadorRepository.ObterTodos();
         }
 
         public async Task<Operador> Consultar(Guid? id)

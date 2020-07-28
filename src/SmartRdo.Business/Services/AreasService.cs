@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using SmartRdo.Business.Interfaces;
+using SmartRdo.Business.Interfaces.repository;
 using SmartRdo.Business.Interfaces.services;
 using SmartRdo.Business.Models;
 
@@ -10,8 +11,11 @@ namespace SmartRdo.Business.Services
 {
     public class AreasService : BaseService, IAreasService
     {
-        public AreasService(INotificador notificador) : base(notificador)
+        private readonly IAreasRepository _areasRepository;
+
+        public AreasService(INotificador notificador, IAreasRepository areasRepository) : base(notificador)
         {
+            _areasRepository = areasRepository;
         }
 
 
@@ -32,7 +36,7 @@ namespace SmartRdo.Business.Services
 
         public async Task<List<Area>> ObterTodos()
         {
-            throw new NotImplementedException();
+            return await _areasRepository.ObterTodos();
         }
 
         public async Task<Area> Consultar(Guid? id)
