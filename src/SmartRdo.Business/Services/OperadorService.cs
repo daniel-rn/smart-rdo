@@ -21,17 +21,17 @@ namespace SmartRdo.Business.Services
 
         public async Task Adicione(Operador atividade)
         {
-            throw new NotImplementedException();
+            await _operadorRepository.Adicionar(atividade);
         }
 
         public async Task Atualize(Operador atividade)
         {
-            throw new NotImplementedException();
+            await _operadorRepository.Atualizar(atividade);
         }
 
         public async Task Remove(Guid id)
         {
-            throw new NotImplementedException();
+            await _operadorRepository.Remover(id);
         }
 
         public async Task<List<Operador>> ObterTodos()
@@ -41,7 +41,7 @@ namespace SmartRdo.Business.Services
 
         public async Task<Operador> Consultar(Guid? id)
         {
-            throw new NotImplementedException();
+            await _operadorRepository.ObterPorId(id.Value);
         }
     }
 }
