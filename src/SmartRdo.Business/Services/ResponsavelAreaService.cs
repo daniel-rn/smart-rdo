@@ -12,25 +12,25 @@ namespace SmartRdo.Business.Services
     {
         private readonly IResponsavelAreaRepository _responsavelAreaRepository;
 
-        public ResponsavelAreaService(INotificador notificador, IResponsavelAreaRepository responsavelAreaRepository) : base(notificador)
+        public ResponsavelAreaService(INotificador notificador, IResponsavelAreaRepository responsavelAreaRepository) 
+            : base(notificador)
         {
             _responsavelAreaRepository = responsavelAreaRepository;
         }
 
-
         public async Task Adicione(ResponsavelArea atividade)
         {
-            throw new NotImplementedException();
+            await _responsavelAreaRepository.Adicionar(atividade);
         }
 
         public async Task Atualize(ResponsavelArea atividade)
         {
-            throw new NotImplementedException();
+            await _responsavelAreaRepository.Atualizar(atividade);
         }
 
         public async Task Remove(Guid id)
         {
-            throw new NotImplementedException();
+            await _responsavelAreaRepository.Remover(id);
         }
 
         public async Task<List<ResponsavelArea>> ObterTodos()
@@ -40,7 +40,7 @@ namespace SmartRdo.Business.Services
 
         public async Task<ResponsavelArea> Consultar(Guid? id)
         {
-            throw new NotImplementedException();
+            return await _responsavelAreaRepository.ObterPorId(id.Value);
         }
     }
 }

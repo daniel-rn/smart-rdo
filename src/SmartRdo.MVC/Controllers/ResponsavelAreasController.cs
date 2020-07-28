@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SmartRdo.Business.Interfaces.services;
 using SmartRdo.Business.Models;
 using SmartRdo.Data.Context;
 
@@ -10,16 +11,16 @@ namespace SmartRdo.MVC.Controllers
 {
     public class ResponsavelAreasController : Controller
     {
-        private readonly SmartRdoDbContext _context;
+        private readonly IResponsavelAreasService _responsavelAreasService;
 
-        public ResponsavelAreasController(SmartRdoDbContext context)
+        public ResponsavelAreasController(IResponsavelAreasService responsavelAreaService)
         {
-            _context = context;
+            _responsavelAreasService = responsavelAreaService;
         }
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ResponsavelAreas.ToListAsync());
+            return View(await _responsavelAreasService.ObterTodos());
         }
 
         public async Task<IActionResult> Details(Guid? id)
@@ -29,8 +30,8 @@ namespace SmartRdo.MVC.Controllers
                 return NotFound();
             }
 
-            var responsavelArea = await _context.ResponsavelAreas
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var responsavelArea = await _responsavelAreasService.Consultar(id);
+
             if (responsavelArea == null)
             {
                 return NotFound();
@@ -46,15 +47,15 @@ namespace SmartRdo.MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Nome,Id")] ResponsavelArea responsavelArea)
+        public async Task<IActionResult> Create(ResponsavelArea responsavelArea)
         {
             if (ModelState.IsValid)
             {
                 responsavelArea.Id = Guid.NewGuid();
-                _context.Add(responsavelArea);
-                await _context.SaveChangesAsync();
+                await _responsavelAreasService.Adicione(responsavelArea);
                 return RedirectToAction(nameof(Index));
             }
+
             return View(responsavelArea);
         }
 
@@ -65,7 +66,7 @@ namespace SmartRdo.MVC.Controllers
                 return NotFound();
             }
 
-            var responsavelArea = await _context.ResponsavelAreas.FindAsync(id);
+            var responsavelArea = await _responsavelAreasService.Consultar(id);
             if (responsavelArea == null)
             {
                 return NotFound();
@@ -86,8 +87,7 @@ namespace SmartRdo.MVC.Controllers
             {
                 try
                 {
-                    _context.Update(responsavelArea);
-                    await _context.SaveChangesAsync();
+                    await _responsavelAreasService.Atualize(responsavelArea);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -110,8 +110,8 @@ namespace SmartRdo.MVC.Controllers
                 return NotFound();
             }
 
-            var responsavelArea = await _context.ResponsavelAreas
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var responsavelArea = await _responsavelAreasService.Consultar(id);
+
             if (responsavelArea == null)
             {
                 return NotFound();
@@ -124,15 +124,13 @@ namespace SmartRdo.MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var responsavelArea = await _context.ResponsavelAreas.FindAsync(id);
-            _context.ResponsavelAreas.Remove(responsavelArea);
-            await _context.SaveChangesAsync();
+            await _responsavelAreasService.Remove(id);
             return RedirectToAction(nameof(Index));
         }
 
         private bool ResponsavelAreaExists(Guid id)
         {
-            return _context.ResponsavelAreas.Any(e => e.Id == id);
+            return _responsavelAreasService.Consultar(id) != null;
         }
     }
 }
