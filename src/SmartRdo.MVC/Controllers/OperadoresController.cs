@@ -1,29 +1,26 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SmartRdo.Business.Interfaces.services;
 using SmartRdo.Business.Models;
-using SmartRdo.Data.Context;
 
 namespace SmartRdo.MVC.Controllers
 {
     public class OperadoresController : Controller
     {
-        private readonly SmartRdoDbContext _context;
+        private readonly IOperadoresService _operadoresService;
 
-        public OperadoresController(SmartRdoDbContext context)
+        public OperadoresController(IOperadoresService operadoresService)
         {
-            _context = context;
+            _operadoresService = operadoresService;
         }
 
-        // GET: Operadores
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Operadores.ToListAsync());
+            return View(await _operadoresService.ObterTodos());
         }
 
-        // GET: Operadores/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -31,8 +28,8 @@ namespace SmartRdo.MVC.Controllers
                 return NotFound();
             }
 
-            var operador = await _context.Operadores
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var operador = await _operadoresService.Consultar(id);
+
             if (operador == null)
             {
                 return NotFound();
@@ -41,15 +38,11 @@ namespace SmartRdo.MVC.Controllers
             return View(operador);
         }
 
-        // GET: Operadores/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Operadores/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Nome,Id")] Operador operador)
@@ -57,14 +50,12 @@ namespace SmartRdo.MVC.Controllers
             if (ModelState.IsValid)
             {
                 operador.Id = Guid.NewGuid();
-                _context.Add(operador);
-                await _context.SaveChangesAsync();
+                await _operadoresService.Adicione(operador);
                 return RedirectToAction(nameof(Index));
             }
             return View(operador);
         }
 
-        // GET: Operadores/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -72,7 +63,8 @@ namespace SmartRdo.MVC.Controllers
                 return NotFound();
             }
 
-            var operador = await _context.Operadores.FindAsync(id);
+            var operador = await _operadoresService.Consultar(id);
+
             if (operador == null)
             {
                 return NotFound();
@@ -80,9 +72,6 @@ namespace SmartRdo.MVC.Controllers
             return View(operador);
         }
 
-        // POST: Operadores/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, [Bind("Nome,Id")] Operador operador)
@@ -96,8 +85,7 @@ namespace SmartRdo.MVC.Controllers
             {
                 try
                 {
-                    _context.Update(operador);
-                    await _context.SaveChangesAsync();
+                    await _operadoresService.Atualize(operador);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -115,7 +103,6 @@ namespace SmartRdo.MVC.Controllers
             return View(operador);
         }
 
-        // GET: Operadores/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -123,8 +110,8 @@ namespace SmartRdo.MVC.Controllers
                 return NotFound();
             }
 
-            var operador = await _context.Operadores
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var operador = await _operadoresService.Consultar(id);
+
             if (operador == null)
             {
                 return NotFound();
@@ -133,20 +120,17 @@ namespace SmartRdo.MVC.Controllers
             return View(operador);
         }
 
-        // POST: Operadores/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var operador = await _context.Operadores.FindAsync(id);
-            _context.Operadores.Remove(operador);
-            await _context.SaveChangesAsync();
+            await _operadoresService.Remove(id);
             return RedirectToAction(nameof(Index));
         }
 
         private bool OperadorExists(Guid id)
         {
-            return _context.Operadores.Any(e => e.Id == id);
+            return _operadoresService.Consultar(id) != null;
         }
     }
 }

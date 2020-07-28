@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SmartRdo.Business.Interfaces.services;
 using SmartRdo.Business.Models;
 using SmartRdo.Data.Context;
 
@@ -11,16 +12,16 @@ namespace SmartRdo.MVC.Controllers
     
     public class AreasController : Controller
     {
-        private readonly SmartRdoDbContext _context;
+        private readonly IAreasService _areasService;
 
-        public AreasController(SmartRdoDbContext context)
+        public AreasController(SmartRdoDbContext context, IAreasService areasService)
         {
-            _context = context;
+            _areasService = areasService;
         }
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Areas.ToListAsync());
+            return View(await _areasService.ObterTodos());
         }
 
         public async Task<IActionResult> Details(Guid? id)
@@ -30,8 +31,8 @@ namespace SmartRdo.MVC.Controllers
                 return NotFound();
             }
 
-            var area = await _context.Areas
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var area = await _areasService.Consultar(id);
+            
             if (area == null)
             {
                 return NotFound();
@@ -52,8 +53,7 @@ namespace SmartRdo.MVC.Controllers
             if (ModelState.IsValid)
             {
                 area.Id = Guid.NewGuid();
-                _context.Add(area);
-                await _context.SaveChangesAsync();
+                await _areasService.Adicione(area);
                 return RedirectToAction(nameof(Index));
             }
             return View(area);
@@ -66,7 +66,7 @@ namespace SmartRdo.MVC.Controllers
                 return NotFound();
             }
 
-            var area = await _context.Areas.FindAsync(id);
+            var area = await _areasService.Consultar(id);
             if (area == null)
             {
                 return NotFound();
@@ -87,8 +87,7 @@ namespace SmartRdo.MVC.Controllers
             {
                 try
                 {
-                    _context.Update(area);
-                    await _context.SaveChangesAsync();
+                    await _areasService.Atualize(area);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -111,8 +110,7 @@ namespace SmartRdo.MVC.Controllers
                 return NotFound();
             }
 
-            var area = await _context.Areas
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var area = await _areasService.Consultar(id);
             if (area == null)
             {
                 return NotFound();
@@ -125,15 +123,13 @@ namespace SmartRdo.MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var area = await _context.Areas.FindAsync(id);
-            _context.Areas.Remove(area);
-            await _context.SaveChangesAsync();
+            await _areasService.Remove(id);
             return RedirectToAction(nameof(Index));
         }
 
         private bool AreaExists(Guid id)
         {
-            return _context.Areas.Any(e => e.Id == id);
+            return _areasService.Consultar(id) != null;
         }
     }
 }
