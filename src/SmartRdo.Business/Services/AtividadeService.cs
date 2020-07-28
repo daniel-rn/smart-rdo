@@ -3,7 +3,6 @@ using SmartRdo.Business.Models;
 using SmartRdo.Business.Models.Validacoes;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using SmartRdo.Business.Interfaces.repository;
 using SmartRdo.Business.Interfaces.services;

@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Security.AccessControl;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using SmartRdo.Business.Interfaces;
 using SmartRdo.Business.Interfaces.services;
 using SmartRdo.Business.Models;
-using SmartRdo.Data.Context;
 
 namespace SmartRdo.MVC.Controllers
 {

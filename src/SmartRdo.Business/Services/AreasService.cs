@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 using SmartRdo.Business.Interfaces;
 using SmartRdo.Business.Interfaces.repository;
@@ -13,7 +12,8 @@ namespace SmartRdo.Business.Services
     {
         private readonly IAreasRepository _areasRepository;
 
-        public AreasService(INotificador notificador, IAreasRepository areasRepository) : base(notificador)
+        public AreasService(INotificador notificador, IAreasRepository areasRepository) 
+            : base(notificador)
         {
             _areasRepository = areasRepository;
         }

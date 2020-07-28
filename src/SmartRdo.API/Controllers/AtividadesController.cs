@@ -5,7 +5,6 @@ using SmartRdo.Business.Interfaces;
 using SmartRdo.Business.Models;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using SmartRdo.API.ViewModels;
 using SmartRdo.Business.Interfaces.repository;
 using SmartRdo.Business.Interfaces.services;
