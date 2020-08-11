@@ -36,12 +36,14 @@ services:
       - db.database
 
   db.database:
-    container_name: postgres
+    container_name: smart_rdo_db
     image: postgres
     restart: always
     ports:
       - "5432:5432"
     environment:
       - POSTGRES_PASSWORD=docker
+    volumes:
+      - /home/docker/pgdata:/var/lib/postgresql/data
       
     

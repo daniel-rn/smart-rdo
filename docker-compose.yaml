@@ -3,7 +3,7 @@ version: '3'
 services:
   db.database:
     image: postgres
-    container_name: postgres_smart_rdo
+    container_name: smart_rdo_db
     restart: always
     ports:
       - "5432:5432"
@@ -12,7 +12,6 @@ services:
       - POSTGRES_PASSWORD=docker
       - POSTGRES_DB=SmartRDO
     volumes:
-      - .docker/pgdata:/var/lib/postgresql/data
-
+      - /home/docker/pgdata:/var/lib/postgresql/data
       
     
