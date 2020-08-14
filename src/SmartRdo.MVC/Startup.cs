@@ -30,12 +30,6 @@ namespace SmartRdo.MVC
 
             services.AddControllersWithViews();
             services.AddRazorPages();
-
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -60,6 +54,7 @@ namespace SmartRdo.MVC
             app.UseGlobalizationConfig();
 
             app.UseAuthentication();
+           
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
