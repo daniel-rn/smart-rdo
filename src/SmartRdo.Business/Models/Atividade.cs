@@ -20,8 +20,6 @@ namespace SmartRdo.Business.Models
         public DateTime InicioPrevisto { get; set; }
         [Display(Name = "Previsão de término")]
         public DateTime FimPrevisto { get; set; }
-        [Display(Name = "Local de descarte")]
-        public string LocalDescarte { get; set; }
         [Display(Name = "Cliente")]
         public Guid ClienteId { get; set; }
         public Guid AreaId { get; set; }

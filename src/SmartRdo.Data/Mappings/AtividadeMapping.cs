@@ -20,9 +20,6 @@ namespace SmartRdo.Data.Mappings
                 .IsRequired()
                 .HasColumnType("varchar(200)");
 
-            builder.Property(a => a.LocalDescarte)
-                .IsRequired()
-                .HasColumnType("varchar(255)");
 
             builder.HasMany(a => a.AtividadeFotos)
                 .WithOne(f => f.Atividade)
