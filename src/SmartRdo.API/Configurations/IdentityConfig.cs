@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -12,11 +13,10 @@ namespace SmartRdo.API.Configurations
 {
     public static class IdentityConfig
     {
-        // pensar no problema de autenticacao para api e mvc
         public static IServiceCollection AddIdentityConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ApiDbContext>(options =>
-                options.UseNpgsql(configuration.GetConnectionString("MyWebMvcConnection")));
+                options.UseNpgsql(configuration.GetConnectionString("SmartRdoConnection")));
 
             services.AddDefaultIdentity<IdentityUser>()
                 .AddRoles<IdentityRole>()

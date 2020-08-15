@@ -14,7 +14,7 @@ namespace SmartRdo.API
     {
         public IConfiguration Configuration { get; }
 
-        public Startup(IWebHostEnvironment hostEnvironment)
+        public Startup(IHostEnvironment hostEnvironment)
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(hostEnvironment.ContentRootPath)
@@ -35,7 +35,7 @@ namespace SmartRdo.API
             services.AddIdentityConfiguration(Configuration);
 
             services.AddDbContext<SmartRdoDbContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("MyWebMvcConnection")));
+                options.UseNpgsql(Configuration.GetConnectionString("SmartRdoConnection")));
 
             services
                 .AddControllers()
@@ -62,9 +62,11 @@ namespace SmartRdo.API
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseCors(option => option.AllowAnyHeader()
-                .AllowAnyOrigin()
-                .AllowAnyOrigin());
+            app.UseCors(option => 
+                option
+                    .AllowAnyHeader()
+                    .AllowAnyOrigin()
+                    .AllowAnyOrigin());
 
             app.UseEndpoints(endpoints =>
             {
