@@ -16,9 +16,9 @@ namespace SmartRdo.Business.Models
         public string Descricao { get; set; }
         public DateTime Inicio { get; set; }
         public DateTime Fim { get; set; }
-        [Display(Name = "Previsão de início")]
+        [Display(Name = "Inicio")]
         public DateTime InicioPrevisto { get; set; }
-        [Display(Name = "Previsão de término")]
+        [Display(Name = "Fim")]
         public DateTime FimPrevisto { get; set; }
         [Display(Name = "Cliente")]
         public Guid ClienteId { get; set; }
@@ -35,7 +35,7 @@ namespace SmartRdo.Business.Models
         public Cliente Cliente { get; set; }
         [Display(Name = "Área")]
         public Area Area { get; set; }
-        [Display(Name = "Responsável da área")]
+        [Display(Name = "Responsável")]
         public ResponsavelArea ResponsavelArea { get; set; }
 
         [Display(Name = "Operador")]

@@ -20,12 +20,6 @@
                 @Html.DisplayNameFor(model => model.Descricao)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Inicio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Fim)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.InicioPrevisto)
             </th>
             <th>
@@ -57,12 +51,6 @@
                     @Html.DisplayFor(modelItem => item.Descricao)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Inicio)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Fim)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.InicioPrevisto)
                 </td>
                 <td>
@@ -81,8 +69,8 @@
                     @Html.DisplayFor(modelItem => item.Operador.Nome)
                 </td>
                 <td class="text-right">
-                    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id"><spam class="fa fa-search"></spam></a>
-                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id"><spam class="fa fa-pencil-alt"></spam></a>
+                    <a class="btn btn-warning" asp-action="Details" asp-route-id="@item.Id"><spam class="fa fa-search"></spam></a>
+                    <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.Id"><spam class="fa fa-pencil-alt"></spam></a>
                     <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id"><spam class="fa fa-trash"></spam></a>
                 </td>
             </tr>
