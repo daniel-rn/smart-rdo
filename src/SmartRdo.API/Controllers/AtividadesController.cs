@@ -12,7 +12,6 @@ using SmartRdo.Business.Interfaces.services;
 namespace SmartRdo.API.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
     public class AtividadesController : MainController
     {
         private readonly IAtividadeRepository _atividadeRepository;
