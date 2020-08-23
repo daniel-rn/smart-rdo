@@ -26,9 +26,9 @@ namespace SmartRdo.Business.Services
              await _atividadeRepository.Adicionar(atividade);
         }
 
-        public Task Atualize(Atividade produto)
+        public async Task Atualize(Atividade atividade)
         {
-            throw new NotImplementedException();
+            await _atividadeRepository.Atualizar(atividade);
         }
 
         public Task Remove(Guid id)
