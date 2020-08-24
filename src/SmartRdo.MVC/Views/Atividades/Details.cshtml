@@ -21,19 +21,7 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Descricao)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Inicio)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Inicio)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Fim)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Fim)
-        </dd>
+        </dd>        
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.InicioPrevisto)
         </dt>
@@ -57,7 +45,7 @@
             @Html.DisplayNameFor(model => model.Area)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Area.CodigoArea)
+            @Html.DisplayFor(model => model.Area.InformacaoArea)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.ResponsavelArea)
@@ -69,11 +57,11 @@
             @Html.DisplayNameFor(model => model.Operador)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Operador.Id)
+            @Html.DisplayFor(model => model.Operador.Nome)
         </dd>
     </dl>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-block btn-success">Editar</a>
-    <a asp-action="Index" class="btn btn-block btn-outline-primary">Retornar para Atividades</a>
+    <a asp-action="Index" class="btn btn-block btn-outline-primary">Retornar</a>
 </div>

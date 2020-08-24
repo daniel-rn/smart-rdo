@@ -42,7 +42,7 @@
             @Html.DisplayNameFor(model => model.Area)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Area.CodigoArea)
+            @Html.DisplayFor(model => @model.Area.InformacaoArea)
         </dd class>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.ResponsavelArea)
@@ -61,6 +61,6 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Deletar" class="btn btn-block btn-danger" />
-        <a asp-action="Index" class="btn btn-block btn-outline-primary">Retornar para Atividades</a>
+        <a asp-action="Index" class="btn btn-block btn-outline-primary">Retornar</a>
     </form>
 </div>
