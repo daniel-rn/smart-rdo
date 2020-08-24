@@ -1,63 +1,69 @@
 ﻿@model SmartRdo.Business.Models.Atividade
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Criar";
 }
 
-<h1>Create</h1>
+<h1 class="text-center">Nova Atividade</h1>
 
-<h4>Atividade</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+<div class="container">    
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4">
                 <label asp-for="Codigo" class="control-label"></label>
                 <input asp-for="Codigo" class="form-control" />
                 <span asp-validation-for="Codigo" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group col-xs-12 col-sm-12 col-md-8 col-lg-8">
                 <label asp-for="Descricao" class="control-label"></label>
                 <input asp-for="Descricao" class="form-control" />
                 <span asp-validation-for="Descricao" class="text-danger"></span>
             </div>
-            <div class="form-group">
+        </div>
+
+        <div class="row">
+            <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
                 <label asp-for="InicioPrevisto" class="control-label">Inicio</label>
                 <input asp-for="InicioPrevisto" class="form-control" />
                 <span asp-validation-for="InicioPrevisto" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
                 <label asp-for="FimPrevisto" class="control-label">Fim</label>
                 <input asp-for="FimPrevisto" class="form-control" />
                 <span asp-validation-for="FimPrevisto" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="ClienteId" class="control-label"></label>
-                <select asp-for="ClienteId" class ="form-control" asp-items="ViewBag.ClienteId"></select>
-            </div>
-            <div class="form-group">
+            <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <label asp-for="AreaId" class="control-label">Área</label>
-                <select asp-for="AreaId" class ="form-control" asp-items="ViewBag.AreaId"></select>
+                <select asp-for="AreaId" class="form-control" asp-items="ViewBag.AreaId"></select>
             </div>
-            <div class="form-group">
+        </div>
+
+        <div class="row">
+            <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <label asp-for="ClienteId" class="control-label"></label>
+                <select asp-for="ClienteId" class="form-control" asp-items="ViewBag.ClienteId"></select>
+            </div>
+            <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <label asp-for="ResponsavelAreaId" class="control-label">Responsável</label>
-                <select asp-for="ResponsavelAreaId" class ="form-control" asp-items="ViewBag.ResponsavelAreaId"></select>
+                <select asp-for="ResponsavelAreaId" class="form-control" asp-items="ViewBag.ResponsavelAreaId"></select>
             </div>
-            <div class="form-group">
-                <label asp-for="OperadorId" class="control-label">Operador</label>
-                <select asp-for="OperadorId" class ="form-control" asp-items="ViewBag.OperadorId"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="OperadorId" class="control-label">Operador</label>
+            <select asp-for="OperadorId" class="form-control" asp-items="ViewBag.OperadorId"></select>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Criar" class="btn btn-block btn-success" />
+        </div>
+        <div class="form-group">
+            <a asp-action="Index" class="btn btn-block btn-danger">Cancelar</a>
+        </div>
+    </form>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

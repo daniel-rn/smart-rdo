@@ -36,13 +36,8 @@ namespace SmartRdo.MVC.Controllers
             return View(await _atividadeService.ObterTodos());
         }
 
-        public async Task<IActionResult> Details(Guid? id)
+        public async Task<IActionResult> Details(Guid id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             var atividade = await _atividadeService.Consultar(id);
 
             if (atividade == null)
@@ -81,13 +76,8 @@ namespace SmartRdo.MVC.Controllers
             return View(atividade);
         }
 
-        public async Task<IActionResult> Edit(Guid? id)
+        public async Task<IActionResult> Edit(Guid id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             var atividade = await _atividadeService.Consultar(id);
 
             if (atividade == null)
@@ -139,13 +129,8 @@ namespace SmartRdo.MVC.Controllers
             return View(atividade);
         }
 
-        public async Task<IActionResult> Delete(Guid? id)
+        public async Task<IActionResult> Delete(Guid id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             var atividade = await _atividadeService.Consultar(id);
 
             if (atividade == null)
