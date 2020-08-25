@@ -6,10 +6,9 @@
 
 <h1>Cadastro de clientes</h1>
 
-<h4>Cliente</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -18,14 +17,13 @@
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Confirmar" class="btn btn-primary" />
+                <input type="submit" value="Criar" class="btn btn-block btn-success" />
+            </div>
+            <div class="form-group">
+                <a asp-action="Index" class="btn btn-block btn-danger">Cancelar</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Voltar</a>
 </div>
 
 @section Scripts {
