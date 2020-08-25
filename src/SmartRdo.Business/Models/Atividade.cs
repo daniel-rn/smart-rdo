@@ -40,5 +40,8 @@ namespace SmartRdo.Business.Models
 
         [Display(Name = "Operador")]
         public Operador Operador { get; set; }
+
+
+        public string StatusAtividade => "Iniciada";
     }
 }
