@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using SmartRdo.Business.Extensions;
 
 namespace SmartRdo.Business.Models
 {
@@ -40,8 +41,27 @@ namespace SmartRdo.Business.Models
 
         [Display(Name = "Operador")]
         public Operador Operador { get; set; }
+        
+        public string Status => CalculeStatus().ToDescription();
 
+        public AtividadeStatus CalculeStatus()
+        {
+            if (this.AvaliacaoAtividade != null)
+            {
+                return AtividadeStatus.Concluida;
+            }
 
-        public string StatusAtividade => "Iniciada";
+            if (Inicio > DateTime.MinValue && Fim > DateTime.MinValue)
+            {
+                return AtividadeStatus.AguardandoRevisao;
+            }
+
+            if (Inicio > DateTime.MinValue)
+            {
+                return AtividadeStatus.Iniciada;
+            }
+
+            return AtividadeStatus.NaoIniciada;
+        }
     }
 }

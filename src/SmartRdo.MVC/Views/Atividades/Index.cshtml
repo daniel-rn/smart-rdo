@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<SmartRdo.Business.Models.Atividade>
+@using SmartRdo.Business.Extensions;
 
 @{
     ViewData["Title"] = "Atividades";
@@ -37,6 +38,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Operador)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -67,6 +71,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Operador.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
                 </td>
                 <td class="text-right">
                     <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@item.Id"><spam class="fa fa-search"></spam></a>
