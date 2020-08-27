@@ -11,7 +11,7 @@ namespace SmartRdo.Data.Repository
 {
     public class AtividadeRepository : Repository<Atividade>, IAtividadeRepository
     {
-        public AtividadeRepository(SmartRdoDbContext db) : base(db){ }
+        public AtividadeRepository(SmartRdoDbContext db) : base(db) { }
 
         public async Task<Atividade> ObtenhaAtivdadeOperador(Guid id)
         {
@@ -20,13 +20,16 @@ namespace SmartRdo.Data.Repository
 
         public async Task<IEnumerable<Atividade>> ObtenhaAtividadesOperadores()
         {
-            return await Db.Atividades.AsNoTracking().Include(a => a.AtividadeOperador)
-                .OrderBy(a => a.Descricao).ToListAsync();
+            //return await Db.Atividades.AsNoTracking().Include(a => a.AtividadeOperador)
+            //    .OrderBy(a => a.Descricao).ToListAsync();
+
+            throw new NotImplementedException();
         }
 
         public async Task<IEnumerable<Atividade>> ObtenhaAtividadesPorOperador(Guid operadorId)
         {
-            return await Buscar(a => a.AtividadeOperador.All(ao => ao.OperadorId == operadorId));
+            //return await Buscar(a => a.AtividadeOperador.All(ao => ao.OperadorId == operadorId));
+            throw new NotImplementedException();
         }
 
         public override async Task<List<Atividade>> ObterTodos()

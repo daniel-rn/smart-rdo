@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SmartRdo.Data.Migrations
 {
-    public partial class Inicial : Migration
+    public partial class SmartRdoInitial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -79,10 +79,10 @@ namespace SmartRdo.Data.Migrations
                     Fim = table.Column<DateTime>(nullable: false),
                     InicioPrevisto = table.Column<DateTime>(nullable: false),
                     FimPrevisto = table.Column<DateTime>(nullable: false),
-                    LocalDescarte = table.Column<string>(type: "varchar(255)", nullable: false),
                     ClienteId = table.Column<Guid>(nullable: false),
                     AreaId = table.Column<Guid>(nullable: false),
-                    ResponsavelAreaId = table.Column<Guid>(nullable: false)
+                    ResponsavelAreaId = table.Column<Guid>(nullable: false),
+                    OperadorId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -97,6 +97,12 @@ namespace SmartRdo.Data.Migrations
                         name: "FK_Atividades_Clientes_ClienteId",
                         column: x => x.ClienteId,
                         principalTable: "Clientes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Atividades_Operadores_OperadorId",
+                        column: x => x.OperadorId,
+                        principalTable: "Operadores",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -152,31 +158,6 @@ namespace SmartRdo.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AtividadesOperadores",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    AtividadeId = table.Column<Guid>(nullable: false),
-                    OperadorId = table.Column<Guid>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AtividadesOperadores", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AtividadesOperadores_Atividades_AtividadeId",
-                        column: x => x.AtividadeId,
-                        principalTable: "Atividades",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_AtividadesOperadores_Operadores_OperadorId",
-                        column: x => x.OperadorId,
-                        principalTable: "Operadores",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AtividadesRecursos",
                 columns: table => new
                 {
@@ -221,12 +202,24 @@ namespace SmartRdo.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Areas",
+                columns: new[] { "Id", "CodigoArea", "Nome" },
+                values: new object[,]
+                {
+                    { new Guid("c59c8d12-7ef0-47f7-9486-9c98b0589852"), "0001", "Galpao" },
+                    { new Guid("a92df7e5-8692-4859-80ec-9662e5524989"), "0002", "Patio" },
+                    { new Guid("880c6a2a-a4d9-41d4-b886-84b48c16d6fe"), "0003", "Refeitorioa" },
+                    { new Guid("362682de-e0a4-42e8-8e67-0ae9f720e724"), "0004", "Producao" },
+                    { new Guid("3b87e8f9-aad1-4864-b8fc-e9d545c044f2"), "0005", "Almoxarifado" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Clientes",
                 columns: new[] { "Id", "Nome" },
                 values: new object[,]
                 {
-                    { new Guid("bf31009f-1d9c-4c81-a4d5-2a5eb8611f95"), "Cliente A" },
-                    { new Guid("ca52f3f4-03b6-403f-a143-45e90146ffd1"), "Cliente B" }
+                    { new Guid("320923ee-b72b-46bb-b2d8-4ae4146ca2c3"), "Cliente A" },
+                    { new Guid("b15227ac-d07f-4ccb-a346-e8638a50ddc5"), "Cliente B" }
                 });
 
             migrationBuilder.InsertData(
@@ -234,11 +227,11 @@ namespace SmartRdo.Data.Migrations
                 columns: new[] { "Id", "Nome" },
                 values: new object[,]
                 {
-                    { new Guid("c59c8d12-7ef0-47f7-9486-9c98b0589852"), "Daniel Nascimento" },
-                    { new Guid("a92df7e5-8692-4859-80ec-9662e5524989"), "Murilo Seno" },
-                    { new Guid("880c6a2a-a4d9-41d4-b886-84b48c16d6fe"), "Gabriel Cotrim" },
+                    { new Guid("3b87e8f9-aad1-4864-b8fc-e9d545c044f2"), "Ronaldo Ghesti" },
                     { new Guid("362682de-e0a4-42e8-8e67-0ae9f720e724"), "Gustavo Sousa" },
-                    { new Guid("3b87e8f9-aad1-4864-b8fc-e9d545c044f2"), "Ronaldo Ghesti" }
+                    { new Guid("880c6a2a-a4d9-41d4-b886-84b48c16d6fe"), "Gabriel Cotrim" },
+                    { new Guid("a92df7e5-8692-4859-80ec-9662e5524989"), "Murilo Seno" },
+                    { new Guid("c59c8d12-7ef0-47f7-9486-9c98b0589852"), "Daniel Nascimento" }
                 });
 
             migrationBuilder.InsertData(
@@ -248,6 +241,18 @@ namespace SmartRdo.Data.Migrations
                 {
                     { new Guid("60f9b002-0f51-481c-a657-98a99e132242"), "Recurso A" },
                     { new Guid("1bd1c1ec-c7c4-4042-a321-8a5fe4647b43"), "Recurso B" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Responsaveis",
+                columns: new[] { "Id", "Nome" },
+                values: new object[,]
+                {
+                    { new Guid("c59c8d12-7ef0-47f7-9486-9c98b0589852"), "Daniel Nascimento" },
+                    { new Guid("a92df7e5-8692-4859-80ec-9662e5524989"), "Murilo Seno" },
+                    { new Guid("880c6a2a-a4d9-41d4-b886-84b48c16d6fe"), "Gabriel Cotrim" },
+                    { new Guid("362682de-e0a4-42e8-8e67-0ae9f720e724"), "Gustavo Sousa" },
+                    { new Guid("3b87e8f9-aad1-4864-b8fc-e9d545c044f2"), "Ronaldo Ghesti" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -261,6 +266,11 @@ namespace SmartRdo.Data.Migrations
                 column: "ClienteId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Atividades_OperadorId",
+                table: "Atividades",
+                column: "OperadorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Atividades_ResponsavelAreaId",
                 table: "Atividades",
                 column: "ResponsavelAreaId");
@@ -269,16 +279,6 @@ namespace SmartRdo.Data.Migrations
                 name: "IX_AtividadesFotos_AtividadeId",
                 table: "AtividadesFotos",
                 column: "AtividadeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AtividadesOperadores_AtividadeId",
-                table: "AtividadesOperadores",
-                column: "AtividadeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AtividadesOperadores_OperadorId",
-                table: "AtividadesOperadores",
-                column: "OperadorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AtividadesRecursos_AtividadeId",
@@ -308,9 +308,6 @@ namespace SmartRdo.Data.Migrations
                 name: "AtividadesFotos");
 
             migrationBuilder.DropTable(
-                name: "AtividadesOperadores");
-
-            migrationBuilder.DropTable(
                 name: "AtividadesRecursos");
 
             migrationBuilder.DropTable(
@@ -318,9 +315,6 @@ namespace SmartRdo.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "ResponsaveisArea");
-
-            migrationBuilder.DropTable(
-                name: "Operadores");
 
             migrationBuilder.DropTable(
                 name: "Recursos");
@@ -333,6 +327,9 @@ namespace SmartRdo.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Clientes");
+
+            migrationBuilder.DropTable(
+                name: "Operadores");
 
             migrationBuilder.DropTable(
                 name: "Responsaveis");
