@@ -20,16 +20,16 @@ namespace SmartRdo.Data.Repository
 
         public async Task<IEnumerable<Atividade>> ObtenhaAtividadesOperadores()
         {
-            //return await Db.Atividades.AsNoTracking().Include(a => a.AtividadeOperador)
-            //    .OrderBy(a => a.Descricao).ToListAsync();
-
-            throw new NotImplementedException();
+            return await Db.Atividades
+                .AsNoTracking()
+                .Include(a => a.Operador)
+                .OrderBy(a => a.Descricao)
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<Atividade>> ObtenhaAtividadesPorOperador(Guid operadorId)
         {
-            //return await Buscar(a => a.AtividadeOperador.All(ao => ao.OperadorId == operadorId));
-            throw new NotImplementedException();
+            return await Buscar(a => a.OperadorId == operadorId);
         }
 
         public override async Task<List<Atividade>> ObterTodos()
