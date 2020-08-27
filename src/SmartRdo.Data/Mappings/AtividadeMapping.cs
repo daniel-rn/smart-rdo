@@ -24,11 +24,6 @@ namespace SmartRdo.Data.Mappings
             builder.HasMany(a => a.AtividadeFotos)
                 .WithOne(f => f.Atividade)
                 .HasForeignKey(f => f.AtividadeId);
-
-            builder.HasMany(a => a.AtividadeOperador)
-                .WithOne(o => o.Ativividade)
-                .HasForeignKey(o => o.AtividadeId);
-
         }
     }
 }

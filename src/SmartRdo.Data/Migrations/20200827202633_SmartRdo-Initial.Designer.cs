@@ -10,8 +10,8 @@ using SmartRdo.Data.Context;
 namespace SmartRdo.Data.Migrations
 {
     [DbContext(typeof(SmartRdoDbContext))]
-    [Migration("20200627200251_AjustaSeeder")]
-    partial class AjustaSeeder
+    [Migration("20200827202633_SmartRdo-Initial")]
+    partial class SmartRdoInitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -104,9 +104,8 @@ namespace SmartRdo.Data.Migrations
                     b.Property<DateTime>("InicioPrevisto")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("LocalDescarte")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
+                    b.Property<Guid>("OperadorId")
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("ResponsavelAreaId")
                         .HasColumnType("uuid");
@@ -116,6 +115,8 @@ namespace SmartRdo.Data.Migrations
                     b.HasIndex("AreaId");
 
                     b.HasIndex("ClienteId");
+
+                    b.HasIndex("OperadorId");
 
                     b.HasIndex("ResponsavelAreaId");
 
@@ -140,27 +141,6 @@ namespace SmartRdo.Data.Migrations
                     b.HasIndex("AtividadeId");
 
                     b.ToTable("AtividadesFotos");
-                });
-
-            modelBuilder.Entity("SmartRdo.Business.Models.AtividadeOperador", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("AtividadeId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("OperadorId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AtividadeId");
-
-                    b.HasIndex("OperadorId");
-
-                    b.ToTable("AtividadesOperadores");
                 });
 
             modelBuilder.Entity("SmartRdo.Business.Models.AtividadeRecurso", b =>
@@ -221,12 +201,12 @@ namespace SmartRdo.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("47019220-7be5-45db-b1c8-c7246d4c3bce"),
+                            Id = new Guid("320923ee-b72b-46bb-b2d8-4ae4146ca2c3"),
                             Nome = "Cliente A"
                         },
                         new
                         {
-                            Id = new Guid("865a1cfb-6972-48a6-9f64-fa18f59261cf"),
+                            Id = new Guid("b15227ac-d07f-4ccb-a346-e8638a50ddc5"),
                             Nome = "Cliente B"
                         });
                 });
@@ -371,6 +351,11 @@ namespace SmartRdo.Data.Migrations
                         .HasForeignKey("ClienteId")
                         .IsRequired();
 
+                    b.HasOne("SmartRdo.Business.Models.Operador", "Operador")
+                        .WithMany()
+                        .HasForeignKey("OperadorId")
+                        .IsRequired();
+
                     b.HasOne("SmartRdo.Business.Models.ResponsavelArea", "ResponsavelArea")
                         .WithMany()
                         .HasForeignKey("ResponsavelAreaId")
@@ -382,19 +367,6 @@ namespace SmartRdo.Data.Migrations
                     b.HasOne("SmartRdo.Business.Models.Atividade", "Atividade")
                         .WithMany("AtividadeFotos")
                         .HasForeignKey("AtividadeId")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SmartRdo.Business.Models.AtividadeOperador", b =>
-                {
-                    b.HasOne("SmartRdo.Business.Models.Atividade", "Ativividade")
-                        .WithMany("AtividadeOperador")
-                        .HasForeignKey("AtividadeId")
-                        .IsRequired();
-
-                    b.HasOne("SmartRdo.Business.Models.Operador", "Operador")
-                        .WithMany("AtividadeOperador")
-                        .HasForeignKey("OperadorId")
                         .IsRequired();
                 });
 

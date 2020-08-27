@@ -141,27 +141,6 @@ namespace SmartRdo.Data.Migrations
                     b.ToTable("AtividadesFotos");
                 });
 
-            modelBuilder.Entity("SmartRdo.Business.Models.AtividadeOperador", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("AtividadeId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("OperadorId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AtividadeId");
-
-                    b.HasIndex("OperadorId");
-
-                    b.ToTable("AtividadesOperadores");
-                });
-
             modelBuilder.Entity("SmartRdo.Business.Models.AtividadeRecurso", b =>
                 {
                     b.Property<Guid>("Id")
@@ -386,19 +365,6 @@ namespace SmartRdo.Data.Migrations
                     b.HasOne("SmartRdo.Business.Models.Atividade", "Atividade")
                         .WithMany("AtividadeFotos")
                         .HasForeignKey("AtividadeId")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SmartRdo.Business.Models.AtividadeOperador", b =>
-                {
-                    b.HasOne("SmartRdo.Business.Models.Atividade", "Ativividade")
-                        .WithMany("AtividadeOperador")
-                        .HasForeignKey("AtividadeId")
-                        .IsRequired();
-
-                    b.HasOne("SmartRdo.Business.Models.Operador", "Operador")
-                        .WithMany("AtividadeOperador")
-                        .HasForeignKey("OperadorId")
                         .IsRequired();
                 });
 
