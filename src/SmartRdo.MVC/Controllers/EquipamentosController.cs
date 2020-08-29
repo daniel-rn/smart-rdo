@@ -1,47 +1,38 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using NToastNotify;
+using SmartRdo.Business.Interfaces;
+using SmartRdo.Business.Interfaces.repository;
+using SmartRdo.Business.Interfaces.services;
 using SmartRdo.Business.Models;
-using SmartRdo.Data.Context;
 
 namespace SmartRdo.MVC.Controllers
 {
-    public class EquipamentosController : Controller
+    public class EquipamentosController : MainController
     {
-        private readonly SmartRdoDbContext _context;
+        private readonly IEquipamentoRepository _equipamentoRepository;
+        private readonly IEquipamentoService _equipamentoService;
 
-        public EquipamentosController(SmartRdoDbContext context)
+        public EquipamentosController(IEquipamentoRepository equipamentoRepository,
+                                        IToastNotification toastNotification,
+                                        INotificador notificador,
+                                        IEquipamentoService equipamentoService) : base(notificador, toastNotification)
         {
-            _context = context;
+            _equipamentoRepository = equipamentoRepository;
+            _equipamentoService = equipamentoService;
         }
 
-        // GET: Equipamentos
-        public async Task<IActionResult> Index()
+        public override async Task<IActionResult> Index()
         {
-            return View(await _context.Equipamentos.ToListAsync());
+            return View(await _equipamentoRepository.ObterTodos());
         }
 
-        // GET: Equipamentos/Details/5
-        public async Task<IActionResult> Details(Guid? id)
+        public async Task<IActionResult> Details(Guid id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            return await ObterEquipamentoComItenChescklist(id);
+        }               
 
-            var equipamento = await _context.Equipamentos
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (equipamento == null)
-            {
-                return NotFound();
-            }
-
-            return View(equipamento);
-        }
-
-        // GET: Equipamentos/Create
         public IActionResult Create()
         {
             var equipamento = new Equipamento();
@@ -49,125 +40,58 @@ namespace SmartRdo.MVC.Controllers
             return View(equipamento);
         }
 
-        // POST: Equipamentos/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Equipamento equipamento)
         {
-            if (ModelState.IsValid)
-            {
-                equipamento.Id = Guid.NewGuid();
-                foreach (var item in equipamento.ItensChecklist)
-                {
-                    item.Id = Guid.NewGuid();
-                    item.IdEquipamento = equipamento.Id;
-                }
-                _context.Add(equipamento);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(equipamento);
+            if (!ModelState.IsValid) return CustomResponse(ModelState);
+
+            await _equipamentoService.Adicione(equipamento);
+
+            return CustomResponse(equipamento);
         }
 
-        // GET: Equipamentos/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
+        public async Task<IActionResult> Edit(Guid id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var equipamento = await _context.Equipamentos.Include(e => e.ItensChecklist).FirstOrDefaultAsync(e => e.Id == id);
-            if (equipamento == null)
-            {
-                return NotFound();
-            }
-            return View(equipamento);
+            return await ObterEquipamentoComItenChescklist(id);
         }
 
-        // POST: Equipamentos/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, [Bind("Nome,Id, ItensChecklist")] Equipamento equipamento)
         {
-            if (id != equipamento.Id)
-            {
-                return NotFound();
-            }
+            if (id != equipamento.Id) return NotFound();
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    var itens = _context.ItensChecklistsEquipamentos.Where(i => i.IdEquipamento == equipamento.Id);
-                    _context.ItensChecklistsEquipamentos.RemoveRange(itens);
+            if (!ModelState.IsValid) return CustomResponse(ModelState);
 
-                    await _context.AddRangeAsync(equipamento.ItensChecklist);
-                    _context.Update(equipamento);
+            await _equipamentoService.Atualize(equipamento);
 
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!EquipamentoExists(equipamento.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(equipamento);
+            return CustomResponse(equipamento);
         }
 
-        // GET: Equipamentos/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
+        public async Task<IActionResult> Delete(Guid id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var equipamento = await _context.Equipamentos
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (equipamento == null)
-            {
-                return NotFound();
-            }
-
-            return View(equipamento);
+            return await ObterEquipamentoComItenChescklist(id);
         }
 
-        // POST: Equipamentos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var equipamento = await _context.Equipamentos.FindAsync(id);
-            _context.Equipamentos.Remove(equipamento);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            var equipamento = _equipamentoRepository.ObterPorId(id);
+
+            if (equipamento is null) return NotFound();
+
+            await _equipamentoService.Remove(id);
+
+            return CustomResponse(equipamento);
         }
 
-        private bool EquipamentoExists(Guid id)
+        private async Task<IActionResult> ObterEquipamentoComItenChescklist(Guid id)
         {
-            return _context.Equipamentos.Any(e => e.Id == id);
-        }
-
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AdicionaItemChecklist([Bind("ItensChecklist")] Equipamento equipamento)
-        {
-            equipamento.ItensChecklist.Add(new ItemChecklistEquipamento { Descricao = "Rebinboca" });
-            return PartialView("ItemChecklist", equipamento);
+            var equipamento = await _equipamentoRepository.ObterPorIdComItensChecklist(id);
+            if (equipamento == null) return NotFound();
+            return View(equipamento);
         }
     }
 }

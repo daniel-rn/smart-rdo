@@ -31,6 +31,9 @@ namespace SmartRdo.MVC.Configurations
             services.AddScoped<IResponsavelAreasService, ResponsavelAreaService>();
             services.AddScoped<IResponsavelAreaRepository, ResponsavelAreaRepository>();
 
+            services.AddScoped<IEquipamentoRepository, EquipamentoRepository>();
+            services.AddScoped<IEquipamentoService, EquipamentoService>();
+
             return services;
         }
     }

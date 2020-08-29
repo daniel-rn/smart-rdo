@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NToastNotify;
 using SmartRdo.Data.Context;
 using SmartRdo.MVC.Configurations;
 
@@ -21,6 +22,15 @@ namespace SmartRdo.MVC
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc().AddNToastNotifyNoty(new NotyOptions
+            {
+                ProgressBar = true,
+                Timeout = 4000,
+                Theme = "metroui"
+                
+                
+            });
+
             services.AddIdentityConfiguration(Configuration);
 
             services.AddDbContext<SmartRdoDbContext>(options =>
@@ -34,6 +44,8 @@ namespace SmartRdo.MVC
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseNToastNotify();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

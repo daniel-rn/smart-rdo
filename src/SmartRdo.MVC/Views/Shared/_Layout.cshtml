@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.css" />
 </head>
+
 <body>
 
     <partial name="_MenuPartial" />
@@ -52,7 +53,11 @@
                 integrity="sha256-E/V4cWE4qvAeO5MOhjtGtqDzPndRO1LBk8lJ/PR7CA4=">
         </script>
     </environment>
+
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await Component.InvokeAsync("NToastNotify")
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>

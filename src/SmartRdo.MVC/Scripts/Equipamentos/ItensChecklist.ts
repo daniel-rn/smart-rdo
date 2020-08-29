@@ -34,7 +34,6 @@ function obterBotaoRemoverItem(index: number): HTMLButtonElement {
     return botaoRemover;
 }
 
-
 function removeRow(id) {
     var controlToBeRemoved = "item_" + id;
     document.getElementById(controlToBeRemoved).remove();

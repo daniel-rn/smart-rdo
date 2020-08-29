@@ -11,6 +11,7 @@
   <ItemGroup>
     <None Remove="Scripts\App\App.ts" />
     <None Remove="Scripts\Equipamentos\ItensChecklist.ts" />
+    <None Remove="Scripts\Helpers\SubmitButton.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,6 +30,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+    <PackageReference Include="NToastNotify" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +40,11 @@
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\App\App.ts" />
     <TypeScriptCompile Include="Scripts\Equipamentos\ItensChecklist.ts" />
+    <TypeScriptCompile Include="Scripts\Helpers\SubmitButton.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Helpers\HTML\" />
   </ItemGroup>
 
 </Project>

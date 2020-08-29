@@ -1,10 +1,11 @@
-﻿@model SmartRdo.Business.Models.Equipamento
+﻿@using SmartRdo.MVC.Helpers
+@model SmartRdo.Business.Models.Equipamento
 
 @{
     ViewData["Title"] = "Novo Equipamento";
 }
 
-<h4 class="align-content-center">Novo Equipamento</h4>
+<h4 class="text-center">Novo Equipamento</h4>
 <hr />
 <div class="container">
     <form asp-action="Create">
@@ -12,7 +13,7 @@
 
         <div class="row">
             <div class="form-group col-12">
-                <label asp-for="Nome" class="control-label"></label>
+                <label asp-for="Nome" class="control-label h5"></label>
                 <input asp-for="Nome" class="form-control" />
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
@@ -20,7 +21,7 @@
 
         <div class="container">
             <div class="row">
-                <label class="control-label ">Checklist</label>
+                <h5 class="control-label ">Checklist</h5>
             </div>
             <div id="itemChecklist" class="align-self-cente">
                 <div class="row" id="item_0">
@@ -31,12 +32,10 @@
 
         <div class="form-group text-center">
             <input class="btn btn-outline-info align-content-center" id="btnAddItem" type="button"
-                   onclick="addRow();" value="Adicionar Item para Checklist" />
+                   onclick="addRow();" value="Adicionar Item no Checklist" />
         </div>
 
-        <div class="form-group">
-            <input type="submit" value="Criar" class="btn btn-block btn-success" />
-        </div>
+        @Html.SubmitButton("Criar")
     </form>
     <div>
         <a class="btn btn-block btn-outline-primary" asp-action="Index">Retornar</a>

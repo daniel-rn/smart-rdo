@@ -28,7 +28,7 @@ namespace SmartRdo.Data.Repository
 
         public virtual async Task<TEntity> ObterPorId(Guid id)
         {
-            return await DbSet.FindAsync(id);
+            return await DbSet.AsNoTracking().FirstOrDefaultAsync(e => e.Id == id);
         }
 
         public virtual async Task<List<TEntity>> ObterTodos()
