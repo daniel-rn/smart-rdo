@@ -28,8 +28,8 @@ namespace SmartRdo.Business.Models
         public Guid ResponsavelAreaId { get; set; }
         public Guid OperadorId { get; set; }
         public AvaliacaoAtividade AvaliacaoAtividade { get; set; }
-        public ICollection<AtividadeRecurso> AtividadeRecurso { get; set; }
-        public IEnumerable<AtividadeFotos> AtividadeFotos { get; set; }
+        public ICollection<AtividadeEquipamento> AtividadeEquipamento { get; set; }
+        public ICollection<AtividadeFotos> AtividadeFotos { get; set; }
 
         /* EF */
         [Display(Name = "Cliente")]

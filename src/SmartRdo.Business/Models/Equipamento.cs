@@ -15,5 +15,7 @@ namespace SmartRdo.Business.Models
 
         /* EF Relations */
         public List<ItemChecklistEquipamento> ItensChecklist { get; set; }
+
+        public ICollection<AtividadeEquipamento> AtividadeEquipamento { get; set; }
     }
 }

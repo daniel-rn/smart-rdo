@@ -2,13 +2,13 @@
 
 namespace SmartRdo.Business.Models
 {
-    public class AtividadeRecurso : Entity
+    public class AtividadeEquipamento : Entity
     {
         public Guid AtividadeId { get; set; }
-        public Guid RecursoId { get; set; }
+        public Guid EquipamentoId { get; set; }
 
         /* EF */
         public Atividade Atividade { get; set; }
-        public Recurso Recurso { get; set; }
+        public Equipamento Equipamento { get; set; }
     }
 }

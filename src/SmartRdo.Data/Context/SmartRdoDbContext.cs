@@ -14,7 +14,7 @@ namespace SmartRdo.Data.Context
         public DbSet<Atividade> Atividades { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Operador> Operadores { get; set; }
-        public DbSet<Recurso> Recursos { get; set; }
+        public DbSet<AtividadeEquipamento> AtividadeEquipamento { get; set; }
         public DbSet<AtividadeFotos> AtividadesFotos { get; set; }
         public DbSet<Area> Areas { get; set; }
         public DbSet<ResponsavelArea> ResponsavelAreas { get; set; }
