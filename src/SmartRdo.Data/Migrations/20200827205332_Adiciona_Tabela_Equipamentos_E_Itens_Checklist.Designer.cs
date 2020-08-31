@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SmartRdo.Data.Context;
@@ -9,9 +10,10 @@ using SmartRdo.Data.Context;
 namespace SmartRdo.Data.Migrations
 {
     [DbContext(typeof(SmartRdoDbContext))]
-    partial class SmartRdoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200827205332_Adiciona_Tabela_Equipamentos_E_Itens_Checklist")]
+    partial class Adiciona_Tabela_Equipamentos_E_Itens_Checklist
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

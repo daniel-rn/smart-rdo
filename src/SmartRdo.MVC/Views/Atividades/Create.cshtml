@@ -1,4 +1,5 @@
-﻿@model SmartRdo.Business.Models.Atividade
+﻿@using SmartRdo.MVC.Helpers
+@model SmartRdo.Business.Models.Atividade
 
 @{
     ViewData["Title"] = "Criar";
@@ -7,7 +8,7 @@
 <h1 class="text-center">Nova Atividade</h1>
 
 <hr />
-<div class="container">    
+<div class="container">
     <form asp-action="Create">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="row">
@@ -54,9 +55,8 @@
             <label asp-for="OperadorId" class="control-label">Operador</label>
             <select asp-for="OperadorId" class="form-control" asp-items="ViewBag.OperadorId"></select>
         </div>
-        <div class="form-group">
-            <input type="submit" value="Criar" class="btn btn-block btn-success" />
-        </div>
+
+        @Html.SubmitButton("Criar")
         <div class="form-group">
             <a asp-action="Index" class="btn btn-block btn-outline-primary">Retornar</a>
         </div>

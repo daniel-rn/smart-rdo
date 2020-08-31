@@ -11,6 +11,7 @@ namespace SmartRdo.Business.Models
          * Criar model no front e remover data anotations daqui
          */
 
+        [Required]
         [Display(Name = "Código")]
         public string Codigo { get; set; }
         [Display(Name = "Descrição")]

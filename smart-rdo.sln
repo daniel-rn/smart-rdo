@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartRdo.Data", "src\SmartR
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartRdo.MVC", "src\SmartRdo.MVC\SmartRdo.MVC.csproj", "{A2A904AD-E12F-471D-AA87-613079A737DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartRdo.Tests", "tests\SmartRdo.Tests\SmartRdo.Tests.csproj", "{99CF54B9-904B-4429-A51F-D53815FA638E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartRdo.Tests", "tests\SmartRdo.Tests\SmartRdo.Tests.csproj", "{99CF54B9-904B-4429-A51F-D53815FA638E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
