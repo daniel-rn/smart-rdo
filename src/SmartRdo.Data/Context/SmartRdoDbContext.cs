@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartRdo.Business.Models;
 using System.Linq;
+using SmartRdo.Data.Seeder;
 
 namespace SmartRdo.Data.Context
 {
