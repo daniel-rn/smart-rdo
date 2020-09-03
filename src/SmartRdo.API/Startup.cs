@@ -45,6 +45,8 @@ namespace SmartRdo.API
 
             services.AddCors();
 
+            services.AddSwaggerConf();
+
             services.ResolveDependencies();
         }
 
@@ -67,6 +69,8 @@ namespace SmartRdo.API
                     .AllowAnyHeader()
                     .AllowAnyOrigin()
                     .AllowAnyOrigin());
+
+            app.UseSwaggerConf();
 
             app.UseEndpoints(endpoints =>
             {
