@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SmartRdo.MVC.Data;
+using SmartRdo.Data.Context;
 
 namespace SmartRdo.MVC.Configurations
 {

@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using SmartRdo.API.Data;
 using SmartRdo.API.Extensions;
 using SmartRdo.Business.Interfaces;
 using SmartRdo.Business.Interfaces.repository;
@@ -16,7 +15,7 @@ namespace SmartRdo.API.Configurations
     {
         public static IServiceCollection ResolveDependencies(this IServiceCollection services)
         {
-            services.AddScoped<ApiDbContext>();
+            services.AddScoped<ApplicationDbContext>();
             services.AddScoped<SmartRdoDbContext>();
             services.AddScoped<IAtividadeRepository, AtividadeRepository>();
             services.AddScoped<INotificador, Notificador>();

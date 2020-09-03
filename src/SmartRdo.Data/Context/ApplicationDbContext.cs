@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace SmartRdo.MVC.Data
+namespace SmartRdo.Data.Context
 {
     public class ApplicationDbContext : IdentityDbContext
     {
