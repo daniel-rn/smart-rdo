@@ -76,8 +76,6 @@ namespace SmartRdo.MVC
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
-
-            // remover o commentario
         }
     }
 }
